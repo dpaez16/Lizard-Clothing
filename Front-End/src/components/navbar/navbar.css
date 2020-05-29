@@ -29,6 +29,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    align-self: flex-end;
 }
 
 .navbar__items li {
