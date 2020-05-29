@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import {NavBar} from './components/navbar/navbar';
 import {HomePage} from './components/home/homePage';
+import history from './history';
 import './App.css';
 
 
 export default class App extends Component {
     render() {
         return (
-            <BrowserRouter>
+            <Router history={history}>
                 <React.Fragment>
                     <NavBar />
                     <div className='main-content'>
@@ -17,7 +18,7 @@ export default class App extends Component {
                         </Switch>
                     </div>
                 </React.Fragment>
-            </BrowserRouter>
+            </Router>
         );
     }
 };

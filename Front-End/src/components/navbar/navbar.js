@@ -1,5 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import {Dropdown} from 'semantic-ui-react'
+import history from './../../history';
 import './navbar.css';
 
 export const NavBar = _ => {
@@ -13,19 +15,19 @@ export const NavBar = _ => {
             <nav className='navbar__items'>
                 <ul>
                     <li>
-                        <NavLink to='/linear-regression'>Linear Regression</NavLink>
+                        <Dropdown text='Products'>
+                            <Dropdown.Menu>
+                                <Dropdown.Item  text='T-Shirts'
+                                                onMouseDown={() => history.push('/tshirts')} 
+                                />
+                                <Dropdown.Item  text='Hoodies'
+                                                onMouseDown={() => history.push('/hoodies')} 
+                                />
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </li>
                     <li>
-                        <NavLink to='/svm'>SVM</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/k-means'>K-Means</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/k-medoids'>K-Medoids</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/lda'>LDA</NavLink>
+                        <NavLink to='/specialOrders'>Special Orders</NavLink>
                     </li>
                 </ul>
             </nav>
