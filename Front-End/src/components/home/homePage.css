@@ -3,3 +3,7 @@
     width: 50%;
     font-size: 16px;
 }
+
+.gallery__image {
+    max-width: 50% !important;
+}
