@@ -43,6 +43,7 @@
 
 .navbar__items a:hover,
 .dropdown,
+.instagram,
 .navbar__items a:active,
 .navbar__items a.active {
     color: white;

@@ -29,6 +29,9 @@ export const NavBar = _ => {
                     <li>
                         <NavLink to='/specialOrders'>Special Orders</NavLink>
                     </li>
+                    <li>
+                        <i class="instagram icon" />
+                    </li>
                 </ul>
             </nav>
         </header>
