@@ -43,8 +43,12 @@
 
 .navbar__items a:hover,
 .dropdown,
-.instagram,
 .navbar__items a:active,
 .navbar__items a.active {
     color: white;
+}
+
+.instagram {
+    color: white;
+    font-size: 20px !important;
 }
