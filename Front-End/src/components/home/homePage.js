@@ -7,6 +7,12 @@ export const HomePage = _ => {
     const galleryImages = [
         "gallery/tshirt.jpg",
         "gallery/hoodie.jpg",
+        "gallery/tshirt.jpg",
+        "gallery/hoodie.jpg",
+        "gallery/tshirt.jpg",
+        "gallery/hoodie.jpg",
+        "gallery/tshirt.jpg",
+        "gallery/hoodie.jpg"
     ];
 
     return (
