@@ -69,7 +69,7 @@ export class SpecialOrders extends Component {
                                 control={Button}
                                 content='Send'
                                 disabled={this.invalidForm()}
-                                onClick={this.sendSpecialOrder()}
+                                onClick={async () => this.sendSpecialOrder()}
                     />
                 </Form>
             </div>
