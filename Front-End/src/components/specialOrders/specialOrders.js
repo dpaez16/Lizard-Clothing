@@ -13,15 +13,24 @@ export class SpecialOrders extends Component {
         }
     }
 
-    validEmail() {
-        //const regex = RegExp('(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])');
-        return false;
+    invalidEmail() {
+        const validEmailRegex = RegExp(
+            /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+        );
+        return !validEmailRegex.test(this.state.email);
+    }
+
+    invalidForm() {
+        return this.state.name.length === 0 || this.state.message.length === 0 || this.invalidEmail();
     }
 
     render() {
         return (
             <div>
                 <Header size='huge'>Special Orders</Header>
+                <p>
+                    In the message, specify your custom order as detailed as possible.
+                </p>
                 <Form>
                     <Form.Field id='form-input-control-name'
                                 control={Input}
@@ -38,10 +47,6 @@ export class SpecialOrders extends Component {
                                 onChange={e => {
                                     this.setState({email: e.target.value});
                                 }}
-                                error={{
-                                    content: 'Please enter a valid email address!',
-                                    pointing: 'below'
-                                }}
                     />
                     <Form.Field id='form-textarea-control-message'
                                 control={TextArea}
@@ -54,9 +59,9 @@ export class SpecialOrders extends Component {
                     <Form.Field id='form-button-control-public'
                                 control={Button}
                                 content='Send'
-                                disabled={this.validEmail()}
+                                disabled={this.invalidForm()}
                                 onClick={() => {
-                                    // do stuff
+                                    console.log("sending custom order");
                                 }}
                     />
                 </Form>
