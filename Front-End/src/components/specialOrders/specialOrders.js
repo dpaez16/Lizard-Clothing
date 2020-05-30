@@ -35,7 +35,7 @@ export class SpecialOrders extends Component {
 
     render() {
         return (
-            <div>
+            <div className="special-orders-form">
                 <Header size='huge'>Special Orders</Header>
                 <p>
                     In the message, specify your custom order as detailed as possible.
