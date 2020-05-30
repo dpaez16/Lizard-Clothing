@@ -24,6 +24,15 @@ export class SpecialOrders extends Component {
         return this.state.name.length === 0 || this.state.message.length === 0 || this.invalidEmail();
     }
 
+    sendSpecialOrder() {
+        if (this.invalidForm())
+            return;
+        
+        console.log(this.state.name);
+        console.log(this.state.email);
+        console.log(this.state.message);
+    }
+
     render() {
         return (
             <div>
@@ -60,9 +69,7 @@ export class SpecialOrders extends Component {
                                 control={Button}
                                 content='Send'
                                 disabled={this.invalidForm()}
-                                onClick={() => {
-                                    console.log("sending custom order");
-                                }}
+                                onClick={this.sendSpecialOrder()}
                     />
                 </Form>
             </div>
