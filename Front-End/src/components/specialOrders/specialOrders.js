@@ -10,7 +10,7 @@ export class SpecialOrders extends Component {
             name: "",
             email: "",
             message: ""
-        }
+        };
     }
 
     invalidEmail() {
