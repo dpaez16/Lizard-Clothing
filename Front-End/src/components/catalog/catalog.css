@@ -1,0 +1,14 @@
+.catalog-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.catalog-item {
+    max-width: 25% !important;
+}
+
+.catalog-item__text {
+    text-align: center;
+    font-size: medium;
+}

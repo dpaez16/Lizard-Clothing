@@ -9,6 +9,24 @@ import './App.css';
 
 
 export default class App extends Component {
+    constructor() {
+        super();
+        const tshirts = [
+            {
+                image: 'gallery/tshirt.jpg',
+                name: 'Shirt'
+            },
+            {
+                image: 'gallery/tshirt.jpg',
+                name: 'Shirt 2'
+            }
+        ];
+
+        this.state = {
+            tshirts: tshirts
+        };
+    }
+
     render() {
         return (
             <Router history={history}>
@@ -17,7 +35,12 @@ export default class App extends Component {
                     <div className='main-content'>
                         <Switch>
                             <Route path='/specialOrders' component={SpecialOrders} />
-                            <Route path='/tshirts' component={Catalog} />
+                            <Route path='/tshirts' render={(props) => 
+                                <Catalog    catalogName='T-Shirts'
+                                            catalogList={this.state.tshirts}
+                                            { ...props }
+                                />
+                            }/>
                             <Route path='/' component={HomePage} />
                         </Switch>
                     </div>
