@@ -6,9 +6,11 @@
 
 .catalog-item {
     max-width: 25% !important;
+    border-style: solid;
 }
 
 .catalog-item__text {
     text-align: center;
     font-size: medium;
+    border-top: solid;
 }
