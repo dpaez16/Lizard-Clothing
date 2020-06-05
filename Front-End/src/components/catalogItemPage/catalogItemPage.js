@@ -66,10 +66,14 @@ export class CatalogItemPage extends Component {
     render() {
         return (
             <div className='catalog-item-page'>
-                <Header size='huge'>{this.state.itemName}</Header>
                 <div className='catalog-item-page__container'>
-                    <Image src={`../../${this.state.image}`}/>
-                    <div>
+                    <div className='catalog-item-page__item'>
+                        <Image src={`../../${this.state.image}`}/>
+                        <p>
+                            <b>{this.state.itemName}</b>
+                        </p>
+                    </div>
+                    <div className='catalog-item-page__form'>
                         <Form>
                             <Form.Input
                                 required={true}

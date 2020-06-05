@@ -1,14 +1,27 @@
+.catalog-item-page {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
 .catalog-item-page__container {
     display: flex;
 }
 
-.catalog-item-page__container > img {
+.catalog-item-page__item > img {
     border-style: solid;
     max-height: 400px !important;
     width: auto;
 }
 
-.catalog-item-page__container > div {
+.catalog-item-page__item > p {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.catalog-item-page__form {
     display: flex;
     max-width: 25% !important;
     flex-direction: column;
