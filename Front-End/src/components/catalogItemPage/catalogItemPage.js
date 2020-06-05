@@ -28,29 +28,51 @@ export class CatalogItemPage extends Component {
         const catalogItem = this.props.catalog[itemNum];
         
         this.state = {
-            name: catalogItem.name,
+            itemName: catalogItem.name,
             image: catalogItem.image,
             size: undefined,
             color: undefined,
-            gender: undefined
+            gender: undefined,
+            name: undefined,
+            email: undefined
         };
     }
 
-    formNotFilled() {
-        const {size, color, gender} = this.state;
-        return !(size && color && gender);
+    validEmail() {
+        const validEmailRegex = RegExp(
+            /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+        );
+        return validEmailRegex.test(this.state.email);
+    }
+
+    formNotFilledProperly() {
+        const {name, size, color, gender} = this.state;
+        return !(name && this.validEmail() && size && color && gender);
     }
 
     render() {
         return (
             <div className='catalog-item-page'>
-                <Header size='huge'>{this.state.name}</Header>
+                <Header size='huge'>{this.state.itemName}</Header>
                 <div className='catalog-item-page__container'>
                     <Image src={`../../${this.state.image}`}/>
                     <div>
                         <Form>
+                            <Form.Input
+                                required={true}
+                                label='Name'
+                                onChange={e => {
+                                    this.setState({name: e.target.value});
+                                }}
+                            />
+                            <Form.Input
+                                required={true}
+                                label='Email'
+                                onChange={e => {
+                                    this.setState({email: e.target.value});
+                                }}
+                            />
                             <Form.Select
-                                selection
                                 required={true}
                                 label='Size'
                                 options={sizeOptions}
@@ -77,7 +99,7 @@ export class CatalogItemPage extends Component {
                                     this.setState({color: data.value});
                                 }}
                             />
-                            <Button disabled={this.formNotFilled()}>
+                            <Button disabled={this.formNotFilledProperly()}>
                                 Request Item
                             </Button>
                         </Form>
