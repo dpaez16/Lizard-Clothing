@@ -32,7 +32,8 @@ export const HomePage = _ => {
                         <Image  
                             className='gallery__image'
                             src={imgPath} 
-                            id={i} 
+                            id={i}
+                            key={i} 
                         />
                     );
                 })}

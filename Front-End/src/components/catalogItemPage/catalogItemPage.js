@@ -6,16 +6,20 @@ import './catalogItemPage.css';
 export class CatalogItemPage extends Component {
     constructor(props) {
         super(props);
+        
         const {itemNum} = this.props.match.params;
+        const catalogItem = this.props.catalog[itemNum];
+        
         this.state = {
-            itemNum: itemNum
+            name: catalogItem.name,
+            image: catalogItem.image
         };
     }
 
     render() {
         return (
             <div>
-                <Header size='large'>{this.state.itemNum}</Header>
+                <Header size='huge'>{this.state.name}</Header>
             </div>
         );
     }

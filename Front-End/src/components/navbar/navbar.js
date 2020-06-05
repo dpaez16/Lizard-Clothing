@@ -36,7 +36,7 @@ export const NavBar = _ => {
                                 href='https://www.instagram.com/' 
                                 target="_blank"
                             >
-                                <i class="instagram icon" />
+                                <i className="instagram icon" />
                             </a>
                     </li>
                 </ul>

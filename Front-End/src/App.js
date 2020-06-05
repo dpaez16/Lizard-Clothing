@@ -35,23 +35,37 @@ export default class App extends Component {
                     <NavBar />
                     <div className='main-content'>
                         <Switch>
-                            <Route path='/specialOrders' component={SpecialOrders} />
-                            <Route path='/tshirts' render={(props) => 
-                                <Catalog    
-                                    catalogName='T-Shirts'
-                                    catalogList={this.state.tshirts}
-                                    catalogURL='tshirts'
-                                    { ...props }
-                                />
-                            }/>
-                            <Route  path='/tshirts/:itemNum'
-                                    render={(props) => 
-                                        <CatalogItemPage
-                                            catalog={this.state.tshirts}
-                                            { ...props }
-                                        />
-                            }/>
-                            <Route path='/' component={HomePage} />
+                            <Route 
+                                exact
+                                path='/specialOrders' 
+                                component={SpecialOrders} 
+                            />
+                            <Route 
+                                exact
+                                path='/tshirts' 
+                                render={(props) => 
+                                    <Catalog    
+                                        catalogName='T-Shirts'
+                                        catalogList={this.state.tshirts}
+                                        catalogURL='tshirts'
+                                        { ...props }
+                                    />
+                                }
+                            />
+                            <Route 
+                                exact
+                                path='/tshirts/:itemNum'
+                                render={(props) => 
+                                    <CatalogItemPage
+                                        catalog={this.state.tshirts}
+                                        { ...props }
+                                    />
+                                }
+                            />
+                            <Route 
+                                path='/' 
+                                component={HomePage} 
+                            />
                         </Switch>
                     </div>
                 </React.Fragment>
