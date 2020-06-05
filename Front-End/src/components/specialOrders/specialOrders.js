@@ -28,6 +28,7 @@ export class SpecialOrders extends Component {
         if (this.invalidForm())
             return;
         
+        // TODO
         console.log(this.state.name);
         console.log(this.state.email);
         console.log(this.state.message);

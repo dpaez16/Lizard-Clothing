@@ -9,6 +9,7 @@
 
 .catalog-item-page__container > div {
     display: flex;
+    max-width: 25% !important;
     flex-direction: column;
     margin-left: 1%;
 }
