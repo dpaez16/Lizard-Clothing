@@ -1,15 +1,16 @@
-.catalog-item-page__container > img {
-    max-width: 25% !important;
-    border-style: solid;
-}
-
 .catalog-item-page__container {
     display: flex;
+}
+
+.catalog-item-page__container > img {
+    border-style: solid;
+    max-height: 400px !important;
+    width: auto;
 }
 
 .catalog-item-page__container > div {
     display: flex;
     max-width: 25% !important;
     flex-direction: column;
-    margin-left: 1%;
+    margin-left: 2%;
 }
