@@ -21,7 +21,12 @@ export const HomePage = _ => {
                 (Lizard Clothing Logo)
             </Header>
             <p>
-                (Description Here)
+                (Lizard Clothing Description)
+            </p>
+            <p>
+                We have a selection of custom-made T-Shirts and Hoodies 
+                (under "Products"). If you don't see a particular product on here and you
+                want to request a custom product, feel free to contact me (via "Special Orders").
             </p>
             <Header size='huge'>
                 <u>Gallery</u>
