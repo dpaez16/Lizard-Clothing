@@ -67,10 +67,16 @@ export class CatalogItemPage extends Component {
         return (
             <div className='catalog-item-page'>
                 <div className='catalog-item-page__container'>
-                    <div className='catalog-item-page__item'>
+                    <div className='catalog-item-page__metadata'>
                         <Image src={`../../${this.state.image}`}/>
-                        <p>
+                        <p className='item-metadata__name'>
                             <b>{this.state.itemName}</b>
+                        </p>
+                        <Header size='large'>
+                            <u>Description</u>
+                        </Header>
+                        <p>
+                            (Item Description)
                         </p>
                     </div>
                     <div className='catalog-item-page__form'>

@@ -1,6 +1,6 @@
 .catalog-item-page {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -10,13 +10,13 @@
     display: flex;
 }
 
-.catalog-item-page__item > img {
+.catalog-item-page__metadata > img {
     border-style: solid;
     max-height: 400px !important;
     width: auto;
 }
 
-.catalog-item-page__item > p {
+.item-metadata__name {
     text-align: center;
     margin-top: 5%;
 }

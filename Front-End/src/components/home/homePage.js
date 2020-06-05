@@ -24,7 +24,7 @@ export const HomePage = _ => {
                 (Description Here)
             </p>
             <Header size='huge'>
-                <u>Gallery</u>:
+                <u>Gallery</u>
             </Header>
             <div className='gallery'>
                 {galleryImages.map((imgPath, i) => {
