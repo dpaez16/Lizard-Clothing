@@ -17,11 +17,13 @@ export const NavBar = _ => {
                     <li>
                         <Dropdown text='Products'>
                             <Dropdown.Menu>
-                                <Dropdown.Item  text='T-Shirts'
-                                                onMouseDown={() => history.push('/tshirts')} 
+                                <Dropdown.Item  
+                                    text='T-Shirts'
+                                    onMouseDown={() => history.push('/tshirts')} 
                                 />
-                                <Dropdown.Item  text='Hoodies'
-                                                onMouseDown={() => history.push('/hoodies')} 
+                                <Dropdown.Item  
+                                    text='Hoodies'
+                                    onMouseDown={() => history.push('/hoodies')} 
                                 />
                             </Dropdown.Menu>
                         </Dropdown>
@@ -30,7 +32,8 @@ export const NavBar = _ => {
                         <NavLink to='/specialOrders'>Special Orders</NavLink>
                     </li>
                     <li>
-                            <a  href='https://www.instagram.com/' 
+                            <a
+                                href='https://www.instagram.com/' 
                                 target="_blank"
                             >
                                 <i class="instagram icon" />

@@ -19,9 +19,10 @@ export class CatalogItem extends Component {
             <div    className='catalog-item'
                     onMouseDown={() => history.push(`/${this.state.catalogURL}/${this.state.ID}`)}
             >
-                <Image  className='catalog-item__image'
-                        src={this.state.image}
-                        id={this.state.ID}
+                <Image  
+                    className='catalog-item__image'
+                    src={this.state.image}
+                    id={this.state.ID}
                 />
                 <p className='catalog-item__text'>
                     <b>{this.state.name}</b>

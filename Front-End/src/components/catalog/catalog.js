@@ -20,10 +20,11 @@ export class Catalog extends Component {
                 <div className='catalog-list'>
                     {this.state.catalogList.map((catalogItem, i) => {
                             return (
-                                <CatalogItem    ID={i}
-                                                image={catalogItem.image}
-                                                name={catalogItem.name}
-                                                catalogURL={this.state.catalogURL}
+                                <CatalogItem    
+                                    ID={i}
+                                    image={catalogItem.image}
+                                    name={catalogItem.name}
+                                    catalogURL={this.state.catalogURL}
                                 />
                             );
                     })}

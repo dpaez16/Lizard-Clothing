@@ -29,9 +29,10 @@ export const HomePage = _ => {
             <div className='gallery'>
                 {galleryImages.map((imgPath, i) => {
                     return (
-                        <Image  className='gallery__image'
-                                src={imgPath} 
-                                id={i} 
+                        <Image  
+                            className='gallery__image'
+                            src={imgPath} 
+                            id={i} 
                         />
                     );
                 })}

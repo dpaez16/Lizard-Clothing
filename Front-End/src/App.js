@@ -4,6 +4,7 @@ import {SpecialOrders} from './components/specialOrders/specialOrders';
 import {NavBar} from './components/navbar/navbar';
 import {HomePage} from './components/home/homePage';
 import {Catalog} from './components/catalog/catalog';
+import {CatalogItemPage} from './components/catalogItemPage/catalogItemPage';
 import history from './history';
 import './App.css';
 
@@ -36,11 +37,19 @@ export default class App extends Component {
                         <Switch>
                             <Route path='/specialOrders' component={SpecialOrders} />
                             <Route path='/tshirts' render={(props) => 
-                                <Catalog    catalogName='T-Shirts'
-                                            catalogList={this.state.tshirts}
-                                            catalogURL='tshirts'
-                                            { ...props }
+                                <Catalog    
+                                    catalogName='T-Shirts'
+                                    catalogList={this.state.tshirts}
+                                    catalogURL='tshirts'
+                                    { ...props }
                                 />
+                            }/>
+                            <Route  path='/tshirts/:itemNum'
+                                    render={(props) => 
+                                        <CatalogItemPage
+                                            catalog={this.state.tshirts}
+                                            { ...props }
+                                        />
                             }/>
                             <Route path='/' component={HomePage} />
                         </Switch>
