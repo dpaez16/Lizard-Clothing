@@ -8,7 +8,8 @@ export class Catalog extends Component {
         super(props);
         this.state = {
             catalogName: this.props.catalogName,
-            catalogList: this.props.catalogList
+            catalogList: this.props.catalogList,
+            catalogURL: this.props.catalogURL
         };
     }
 
@@ -22,6 +23,7 @@ export class Catalog extends Component {
                                 <CatalogItem    ID={i}
                                                 image={catalogItem.image}
                                                 name={catalogItem.name}
+                                                catalogURL={this.state.catalogURL}
                                 />
                             );
                     })}

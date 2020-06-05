@@ -9,13 +9,16 @@ export class CatalogItem extends Component {
         this.state = {
             ID: this.props.ID,
             name: this.props.name,
-            image: this.props.image
+            image: this.props.image,
+            catalogURL: this.props.catalogURL
         };
     }
 
     render() {
         return (
-            <div className='catalog-item'>
+            <div    className='catalog-item'
+                    onMouseDown={() => history.push(`/${this.state.catalogURL}/${this.state.ID}`)}
+            >
                 <Image  className='catalog-item__image'
                         src={this.state.image}
                         id={this.state.ID}

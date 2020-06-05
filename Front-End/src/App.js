@@ -38,6 +38,7 @@ export default class App extends Component {
                             <Route path='/tshirts' render={(props) => 
                                 <Catalog    catalogName='T-Shirts'
                                             catalogList={this.state.tshirts}
+                                            catalogURL='tshirts'
                                             { ...props }
                                 />
                             }/>

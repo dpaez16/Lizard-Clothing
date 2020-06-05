@@ -4,6 +4,10 @@
     margin: 1%;
 }
 
+.catalog-item:hover {
+    cursor: pointer;
+}
+
 .catalog-item__text {
     text-align: center;
     font-size: medium;
