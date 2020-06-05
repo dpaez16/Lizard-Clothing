@@ -18,7 +18,7 @@ export const HomePage = _ => {
     return (
         <div className='home-page'>
             <Header size='huge'>
-                Lizard Clothing
+                (Lizard Clothing Logo)
             </Header>
             <p>
                 (Description Here)

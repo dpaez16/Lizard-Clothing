@@ -9,7 +9,7 @@ export const NavBar = _ => {
         <header className='navbar'>
             <div className='navbar__icon'>
                 <h1>
-                    <NavLink to='/'>Lizard Clothing</NavLink>
+                    <NavLink to='/'>(Lizard Clothing Logo)</NavLink>
                 </h1>
             </div>
             <nav className='navbar__items'>
