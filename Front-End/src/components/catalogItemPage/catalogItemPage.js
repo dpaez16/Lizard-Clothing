@@ -18,8 +18,19 @@ export class CatalogItemPage extends Component {
 
     render() {
         return (
-            <div>
+            <div className='catalog-item-page'>
                 <Header size='huge'>{this.state.name}</Header>
+                <div className='catalog-item-page__container'>
+                    <Image src={`../../${this.state.image}`}/>
+                    <div>
+                        <p>
+                            stuff
+                        </p>
+                        <p>
+                            other stuff
+                        </p>
+                    </div>
+                </div>
             </div>
         );
     }

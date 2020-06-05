@@ -1,0 +1,14 @@
+.catalog-item-page__container > img {
+    max-width: 25% !important;
+    border-style: solid;
+}
+
+.catalog-item-page__container {
+    display: flex;
+}
+
+.catalog-item-page__container > div {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1%;
+}
