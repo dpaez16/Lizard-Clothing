@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Header, Image} from 'semantic-ui-react';
-import history from './../../history';
+import {CatalogItem} from './../catalogItem/catalogItem';
 import './catalog.css';
 
 export class Catalog extends Component {
@@ -19,15 +19,10 @@ export class Catalog extends Component {
                 <div className='catalog-list'>
                     {this.state.catalogList.map((catalogItem, i) => {
                             return (
-                                <div className='catalog-item'>
-                                    <Image  className='catalog-item__image'
-                                            src={catalogItem.image}
-                                            id={i}
-                                    />
-                                    <p className='catalog-item__text'>
-                                        <b>{catalogItem.name}</b>
-                                    </p>
-                                </div>
+                                <CatalogItem    ID={i}
+                                                image={catalogItem.image}
+                                                name={catalogItem.name}
+                                />
                             );
                     })}
                 </div>
