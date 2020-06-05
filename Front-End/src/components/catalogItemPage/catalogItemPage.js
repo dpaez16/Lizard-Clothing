@@ -50,6 +50,19 @@ export class CatalogItemPage extends Component {
         return !(name && this.validEmail() && size && color && gender);
     }
 
+    requestCatalogItem() {
+        if (this.formNotFilledProperly())
+            return;
+
+        // TODO
+        const {name, email, size, gender, color} = this.state;
+        console.log(name);
+        console.log(email);
+        console.log(size);
+        console.log(gender);
+        console.log(color);
+    }
+
     render() {
         return (
             <div className='catalog-item-page'>
@@ -99,7 +112,10 @@ export class CatalogItemPage extends Component {
                                     this.setState({color: data.value});
                                 }}
                             />
-                            <Button disabled={this.formNotFilledProperly()}>
+                            <Button 
+                                disabled={this.formNotFilledProperly()}
+                                onClick={async () => this.requestCatalogItem()}
+                            >
                                 Request Item
                             </Button>
                         </Form>
