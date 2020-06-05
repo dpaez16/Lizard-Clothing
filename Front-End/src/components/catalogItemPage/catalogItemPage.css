@@ -23,7 +23,7 @@
 
 .catalog-item-page__form {
     display: flex;
-    max-width: 25% !important;
+    max-height: 25% !important;
     flex-direction: column;
-    margin-left: 2%;
+    margin-left: 5%;
 }
