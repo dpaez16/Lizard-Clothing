@@ -5,24 +5,25 @@ import {NavBar} from './components/navbar/navbar';
 import {HomePage} from './components/home/homePage';
 import {Catalog} from './components/catalog/catalog';
 import {CatalogItemPage} from './components/catalogItemPage/catalogItemPage';
+import {PostSendPage} from './components/postSendPage/postSendPage';
 import history from './history';
 import './App.css';
 
 
+const tshirts = [
+    {
+        image: 'gallery/tshirt.jpg',
+        name: 'Shirt'
+    },
+    {
+        image: 'gallery/tshirt.jpg',
+        name: 'Shirt 2'
+    }
+];
+
 export default class App extends Component {
     constructor() {
         super();
-        const tshirts = [
-            {
-                image: 'gallery/tshirt.jpg',
-                name: 'Shirt'
-            },
-            {
-                image: 'gallery/tshirt.jpg',
-                name: 'Shirt 2'
-            }
-        ];
-
         this.state = {
             tshirts: tshirts
         };
@@ -60,6 +61,13 @@ export default class App extends Component {
                                         catalog={this.state.tshirts}
                                         { ...props }
                                     />
+                                }
+                            />
+                            <Route 
+                                exact
+                                path='/sentRequest'
+                                render={(props) =>
+                                    <PostSendPage { ... props }/>
                                 }
                             />
                             <Route 
