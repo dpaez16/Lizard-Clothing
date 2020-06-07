@@ -29,9 +29,18 @@ export class SpecialOrders extends Component {
             return;
         
         // TODO
+        // Backend will send information in email
         console.log(this.state.name);
         console.log(this.state.email);
         console.log(this.state.message);
+
+        history.push({
+            pathname: '/sentRequest',
+            state: {
+                requestStatus: 'Success',
+                msg: 'Request has gone through.'
+            }
+        });
     }
 
     render() {

@@ -55,12 +55,22 @@ export class CatalogItemPage extends Component {
             return;
 
         // TODO
+        // Backend will send order details to user (as confirmation email)
+        // and write to spreadsheet
         const {name, email, size, gender, color} = this.state;
         console.log(name);
         console.log(email);
         console.log(size);
         console.log(gender);
         console.log(color);
+
+        history.push({
+            pathname: '/sentRequest',
+            state: {
+                requestStatus: 'Success',
+                msg: 'Request has gone through.'
+            }
+        });
     }
 
     render() {
