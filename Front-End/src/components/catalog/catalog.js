@@ -22,6 +22,7 @@ export class Catalog extends Component {
                             return (
                                 <CatalogItem    
                                     ID={i}
+                                    key={i}
                                     image={catalogItem.image}
                                     name={catalogItem.name}
                                     catalogURL={this.state.catalogURL}

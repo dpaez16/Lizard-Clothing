@@ -21,11 +21,23 @@ const tshirts = [
     }
 ];
 
+const hoodies = [
+    {
+        image: 'gallery/hoodie.jpg',
+        name: 'Hoodie'
+    },
+    {
+        image: 'gallery/hoodie.jpg',
+        name: 'Hoodie 2'
+    }
+];
+
 export default class App extends Component {
     constructor() {
         super();
         this.state = {
-            tshirts: tshirts
+            tshirts: tshirts,
+            hoodies: hoodies
         };
     }
 
@@ -59,6 +71,28 @@ export default class App extends Component {
                                 render={(props) => 
                                     <CatalogItemPage
                                         catalog={this.state.tshirts}
+                                        { ...props }
+                                    />
+                                }
+                            />
+                            <Route 
+                                exact
+                                path='/hoodies' 
+                                render={(props) => 
+                                    <Catalog    
+                                        catalogName='Hoodies'
+                                        catalogList={this.state.hoodies}
+                                        catalogURL='hoodies'
+                                        { ...props }
+                                    />
+                                }
+                            />
+                            <Route 
+                                exact
+                                path='/hoodies/:itemNum'
+                                render={(props) => 
+                                    <CatalogItemPage
+                                        catalog={this.state.hoodies}
                                         { ...props }
                                     />
                                 }
