@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch, withRouter } from 'react-router-dom';
 import {SpecialOrders} from './components/specialOrders/specialOrders';
 import {NavBar} from './components/navbar/navbar';
 import {HomePage} from './components/home/homePage';
@@ -48,6 +48,11 @@ export default class App extends Component {
                     <NavBar />
                     <div className='main-content'>
                         <Switch>
+                            <Route 
+                                exact
+                                path='/' 
+                                component={HomePage} 
+                            />
                             <Route 
                                 exact
                                 path='/specialOrders' 
@@ -103,10 +108,6 @@ export default class App extends Component {
                                 render={(props) =>
                                     <PostSendPage { ... props }/>
                                 }
-                            />
-                            <Route 
-                                path='/' 
-                                component={HomePage} 
                             />
                         </Switch>
                     </div>
