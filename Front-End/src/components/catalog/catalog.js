@@ -15,11 +15,7 @@ export class Catalog extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.catalogName !== this.props.catalogName) {
-            this.setState({
-                catalogName: this.props.catalogName,
-                catalogList: this.props.catalogList,
-                catalogURL: this.props.catalogURL
-            })
+            this.setState(this.props);
         }
     }
 

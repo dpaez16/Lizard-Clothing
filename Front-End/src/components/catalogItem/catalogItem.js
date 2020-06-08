@@ -14,10 +14,17 @@ export class CatalogItem extends Component {
         };
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.name !== this.props.name) {
+            this.setState(this.props);
+        }
+    }
+
     render() {
         return (
-            <div    className='catalog-item'
-                    onMouseDown={() => history.push(`/${this.state.catalogURL}/${this.state.ID}`)}
+            <div 
+                className='catalog-item'
+                onMouseDown={() => history.push(`/${this.state.catalogURL}/${this.state.ID}`)}
             >
                 <Image  
                     className='catalog-item__image'
