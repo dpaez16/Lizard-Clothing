@@ -1,8 +1,6 @@
-For the Flask API to work, install the following Python 3 packages:
-  - sklearn
-  - numpy
-  - pyclustering
-  - flask
-  - flask-cors
-  
-Run the API with `python3 app.py`.
+For the Golang API to work, install the following packages:
+	- `github.com/sendgrid/sendgrid-go`
+	- `github.com/sendgrid/sendgrid-go/helpers/mail`
+	- `github.com/gorilla/mux`
+
+Run the API with `go run app.go`.
