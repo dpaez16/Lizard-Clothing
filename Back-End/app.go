@@ -1,31 +1,30 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	//"errors"
 	"net/http"
 	"encoding/json"
-	
+
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"github.com/rs/cors"
 )
 
 type Order struct {
-	Name 		string `json:name`
-	Email 		string `json:email`
-	Message 	string `json:message`
+	Name		string `json:name`
+	Email		string `json:email`
+	Message		string `json:message`
 	ProductType	string `json:productType`
-	ProductName string `json:productName`
-	Size 		string `json:size`
-	Gender 		string `json:gender`
-	Color 		string `json:color`
+	ProductName	string `json:productName`
+	Size		string `json:size`
+	Gender		string `json:gender`
+	Color		string `json:color`
 }
 
 type Response struct {
-	StatusCode 	int
+	StatusCode	int
 	Body		string
 }
 
@@ -33,13 +32,14 @@ type Response struct {
 func sendSpecialOrder(w http.ResponseWriter, r *http.Request) {
 	var order Order
 	var resp Response
-	
+
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	err := json.NewDecoder(r.Body).Decode(&order)
 	if err != nil {
+		log.Println("JSON Decode Error:")
 		log.Println(err)
 		resp.StatusCode = http.StatusBadRequest
-		resp.Body = err
+		resp.Body = err.Error()
 		json.NewEncoder(w).Encode(resp)
 		return
 	}
@@ -52,16 +52,17 @@ func sendSpecialOrder(w http.ResponseWriter, r *http.Request) {
 	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
 	client := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
 	response, err := client.Send(message)
-	
+
 	if err != nil {
+		log.Println("Sendgrid Client Error:")
 		log.Println(err)
 		resp.StatusCode = http.StatusInternalServerError
-		resp.Status = fmt.Sprintf("Error %d", resp.StatusCode)
-		resp.Message = "Email client failed to send special order. Contact website owner." // capture error here
+		resp.Body = err.Error()
 	} else {
-		resp.StatusCode := 
+		resp.StatusCode = response.StatusCode
+		resp.Body = response.Body
 	}
-	
+
 	json.NewEncoder(w).Encode(resp)
 }
 
