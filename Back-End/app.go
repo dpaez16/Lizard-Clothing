@@ -43,7 +43,7 @@ func sendSpecialOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	from := mail.NewEmail("Lizard Clothing", "dpaez972@gmail.com")
+	from := mail.NewEmail("Lizard Clothing", "dpaez97@gmail.com")
 	subject := "Lizard Clothing Special Order"
 	to := mail.NewEmail(order.Name, order.Email)
 	plainTextContent := order.Message
