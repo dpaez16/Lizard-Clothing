@@ -58,7 +58,7 @@ export class CatalogItemPage extends Component {
         // TODO
         // Backend will send order details to user (as confirmation email)
         // and write to spreadsheet
-        const {name, email, size, gender, color, itemType} = this.state;
+        const {name, email, size, gender, color, itemType, itemName} = this.state;
         console.log(name);
         console.log(email);
         console.log(size);
