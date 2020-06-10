@@ -28,7 +28,7 @@ type Response struct {
 }
 
 
-func sendSpecialOrder(w http.ResponseWriter, r *http.Request) {
+func sendOrder(w http.ResponseWriter, r *http.Request) {
 	var order Order
 	var resp Response
 
@@ -43,6 +43,8 @@ func sendSpecialOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// TODO
+	// send email also to Lizard Clothing owner
 	from := mail.NewEmail("Lizard Clothing", "dpaez97@gmail.com")
 	subject := "Lizard Clothing Special Order"
 	to := mail.NewEmail(order.Name, order.Email)
@@ -67,7 +69,9 @@ func sendSpecialOrder(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/sendSpecialOrder", sendSpecialOrder)
+	// TODO
+	// make sure API endpoint works for POST only
+	mux.HandleFunc("/sendOrder", sendOrder)
 
 	corsHandler := cors.Default().Handler(mux)
 	log.Fatal(http.ListenAndServe(":8000", corsHandler))

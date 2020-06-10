@@ -28,6 +28,7 @@ export class CatalogItemPage extends Component {
         const catalogItem = this.props.catalog[itemNum];
         
         this.state = {
+            itemType: this.props.itemType,
             itemName: catalogItem.name,
             image: catalogItem.image,
             size: undefined,
@@ -57,12 +58,14 @@ export class CatalogItemPage extends Component {
         // TODO
         // Backend will send order details to user (as confirmation email)
         // and write to spreadsheet
-        const {name, email, size, gender, color} = this.state;
+        const {name, email, size, gender, color, itemType} = this.state;
         console.log(name);
         console.log(email);
         console.log(size);
         console.log(gender);
         console.log(color);
+        console.log(itemType);
+        console.log(itemName);
 
         history.push({
             pathname: '/sentRequest',

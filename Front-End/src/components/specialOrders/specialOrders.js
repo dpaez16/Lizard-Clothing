@@ -42,9 +42,10 @@ export class SpecialOrders extends Component {
         if (this.invalidForm())
             return;
         
-        // TODO
         // Backend will send information in email
-        const response = await fetch("http://localhost:8000" + '/sendSpecialOrder', {
+        // TODO
+        // make PROXY_URL
+        const response = await fetch("http://localhost:8000" + '/sendOrder', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

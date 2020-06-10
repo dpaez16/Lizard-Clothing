@@ -76,6 +76,7 @@ export default class App extends Component {
                                 render={(props) => 
                                     <CatalogItemPage
                                         catalog={this.state.tshirts}
+                                        itemType="T-Shirts"
                                         { ...props }
                                     />
                                 }
@@ -98,6 +99,7 @@ export default class App extends Component {
                                 render={(props) => 
                                     <CatalogItemPage
                                         catalog={this.state.hoodies}
+                                        itemType="Hoodies"
                                         { ...props }
                                     />
                                 }
