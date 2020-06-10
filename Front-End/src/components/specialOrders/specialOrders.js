@@ -24,13 +24,26 @@ export class SpecialOrders extends Component {
         return this.state.name.length === 0 || this.state.message.length === 0 || this.invalidEmail();
     }
 
+    parseBody(rawBody) {
+        if (rawBody.length == 0) {
+            return "Special Order has been created!"
+        }
+        
+        const newBody = JSON.parse(rawBody);
+        let msg = newBody.errors[0].message;
+        if (msg.slice(-1) !== '.') {
+            msg = msg + '.';
+        }
+
+        return msg;
+    }
+
     async sendSpecialOrder() {
         if (this.invalidForm())
             return;
         
         // TODO
         // Backend will send information in email
-
         const response = await fetch("http://localhost:8000" + '/sendSpecialOrder', {
             method: 'POST',
             headers: {
@@ -40,12 +53,14 @@ export class SpecialOrders extends Component {
         });
 
         const responseData = await response.json();
+        console.log(responseData);
+        const msg = this.parseBody(responseData.Body);
 
         history.push({
             pathname: '/sentRequest',
             state: {
-                requestStatus: responseData.Status,
-                msg: responseData.Message
+                requestStatus: responseData.StatusCode,
+                msg: msg
             }
         });
     }
