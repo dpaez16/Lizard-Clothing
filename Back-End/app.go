@@ -4,38 +4,72 @@ import (
 	"fmt"
 	"log"
 	"os"
+	//"errors"
 	"net/http"
-
+	"encoding/json"
+	
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
-	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
-// https://www.youtube.com/watch?v=bZwJPbp_JMY
+type Order struct {
+	Name 		string `json:name`
+	Email 		string `json:email`
+	Message 	string `json:message`
+	ProductType	string `json:productType`
+	ProductName string `json:productName`
+	Size 		string `json:size`
+	Gender 		string `json:gender`
+	Color 		string `json:color`
+}
+
+type Response struct {
+	StatusCode 	int
+	Body		string
+}
+
 
 func sendSpecialOrder(w http.ResponseWriter, r *http.Request) {
-	/*
-	from := mail.NewEmail("Lizard Clothing", "lizard-clothing-sales@lc.com")
-	subject := "Lizard Clothing Special Order"
-	to := mail.NewEmail("Danny Paez", "dpaez16@yahoo.com")
-	plainTextContent := "Made a special order request!"
-	message := mail.NewSingleEmail(from, subject, to, plainTextContent, "")
-	client := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
-	response, err := client.Send(message)
-
+	var order Order
+	var resp Response
+	
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	err := json.NewDecoder(r.Body).Decode(&order)
 	if err != nil {
 		log.Println(err)
-	} else {
-		fmt.Println(response.StatusCode)
-		fmt.Println(response.Body)
-		fmt.Println(response.Headers)
+		resp.StatusCode = http.StatusBadRequest
+		resp.Body = err
+		json.NewEncoder(w).Encode(resp)
+		return
 	}
-	*/
+
+	from := mail.NewEmail("Lizard Clothing", "dpaez972@gmail.com")
+	subject := "Lizard Clothing Special Order"
+	to := mail.NewEmail(order.Name, order.Email)
+	plainTextContent := order.Message
+	htmlContent := order.Message
+	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
+	client := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
+	response, err := client.Send(message)
+	
+	if err != nil {
+		log.Println(err)
+		resp.StatusCode = http.StatusInternalServerError
+		resp.Status = fmt.Sprintf("Error %d", resp.StatusCode)
+		resp.Message = "Email client failed to send special order. Contact website owner." // capture error here
+	} else {
+		resp.StatusCode := 
+	}
+	
+	json.NewEncoder(w).Encode(resp)
 }
 
 func main() {
-	myRouter := mux.NewRouter().StrictSlash(true)
-	myRouter.HandleFunc("/sendSpecialOrder", sendSpecialOrder).Methods("POST")
-	log.Fatal(http.ListenAndServe(":8000", myRouter))
+	mux := http.NewServeMux()
+	mux.HandleFunc("/sendSpecialOrder", sendSpecialOrder)
+
+	corsHandler := cors.Default().Handler(mux)
+	log.Fatal(http.ListenAndServe(":8000", corsHandler))
 }
 

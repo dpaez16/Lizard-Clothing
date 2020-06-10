@@ -24,21 +24,28 @@ export class SpecialOrders extends Component {
         return this.state.name.length === 0 || this.state.message.length === 0 || this.invalidEmail();
     }
 
-    sendSpecialOrder() {
+    async sendSpecialOrder() {
         if (this.invalidForm())
             return;
         
         // TODO
         // Backend will send information in email
-        console.log(this.state.name);
-        console.log(this.state.email);
-        console.log(this.state.message);
+
+        const response = await fetch("http://localhost:8000" + '/sendSpecialOrder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state)
+        });
+
+        const responseData = await response.json();
 
         history.push({
             pathname: '/sentRequest',
             state: {
-                requestStatus: 'Success',
-                msg: 'Request has gone through.'
+                requestStatus: responseData.Status,
+                msg: responseData.Message
             }
         });
     }
