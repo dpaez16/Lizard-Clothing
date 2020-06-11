@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Form, Button, Header, Image} from 'semantic-ui-react';
 import history from './../../history';
+import {PROXY_URL} from '../misc/proxyURL';
 import './catalogItemPage.css';
 
 const sizeOptions = [
@@ -51,27 +52,55 @@ export class CatalogItemPage extends Component {
         return !(name && this.validEmail() && size && color && gender);
     }
 
+    parseBody(rawBody) {
+        if (rawBody.length == 0) {
+            return "Order has been created!"
+        }
+        
+        const newBody = JSON.parse(rawBody);
+        let msg = newBody.errors[0].message;
+        if (msg.slice(-1) !== '.') {
+            msg = msg + '.';
+        }
+
+        return msg;
+    }
+
     requestCatalogItem() {
         if (this.formNotFilledProperly())
             return;
 
-        // TODO
-        // Backend will send order details to user (as confirmation email)
-        // and write to spreadsheet
-        const {name, email, size, gender, color, itemType, itemName} = this.state;
-        console.log(name);
-        console.log(email);
-        console.log(size);
-        console.log(gender);
-        console.log(color);
-        console.log(itemType);
-        console.log(itemName);
+        const orderDetails = {
+            productType: this.state.itemType,
+            productName: this.state.itemName,
+            size: this.state.size,
+            gender: this.state.gender,
+            color: this.state.color
+        };
+        const order = {
+            name: this.state.name,
+            email: this.state.email,
+            specialOrder: false,
+            orderDetails: orderDetails
+        };
+
+        const response = await fetch(PROXY_URL + '/sendOrder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        });
+
+        const responseData = await response.json();
+        console.log(responseData);
+        const msg = this.parseBody(responseData.Body);
 
         history.push({
             pathname: '/sentRequest',
             state: {
-                requestStatus: 'Success',
-                msg: 'Request has gone through.'
+                requestStatus: responseData.StatusCode,
+                msg: msg
             }
         });
     }

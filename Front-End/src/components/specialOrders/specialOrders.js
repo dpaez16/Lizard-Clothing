@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Form, Input, TextArea, Button, Header } from 'semantic-ui-react';
 import history from './../../history';
+import {PROXY_URL} from '../misc/proxyURL';
 import './specialOrders.css';
 
 export class SpecialOrders extends Component {
@@ -42,15 +43,21 @@ export class SpecialOrders extends Component {
         if (this.invalidForm())
             return;
         
-        // Backend will send information in email
         // TODO
         // make PROXY_URL
-        const response = await fetch("http://localhost:8000" + '/sendOrder', {
+        // Backend will send information in email
+        const order = {
+            name: this.state.name,
+            email: this.state.email,
+            message: this.state.message,
+            specialOrder: true
+        };
+        const response = await fetch(PROXY_URL + '/sendOrder', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify(order)
         });
 
         const responseData = await response.json();
