@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"net/http"
@@ -33,12 +34,58 @@ type Response struct {
 }
 
 
+func createEmailParts(order Order) (string, string) {
+	var title, bottomPortion string
+	if order.SpecialOrder {
+		title = "Special Order Details"
+		bottomPortion = fmt.Sprintf(`
+		Message:
+		<p>
+			%s
+		</p>
+		`, order.Message)
+	} else {
+		title = "Order Details"
+		bottomPortion = fmt.Sprintf(`
+		Order Details:
+		<ul>
+			<li> Product Type: %s </li>
+			<li> Product Name: %s </li>
+			<li> Size: %s </li>
+			<li> Gender: %s </li>
+			<li> Color: %s </li>
+		</ul>
+		`, 
+		order.Details.ProductType, 
+		order.Details.ProductName,
+		order.Details.Size,
+		order.Details.Gender,
+		order.Details.Color)
+	}
+
+	return title, bottomPortion
+}
+
+
+func createMessage(order Order) string {
+	title, bottomPortion := createEmailParts(order)
+
+	return fmt.Sprintf(`
+	<h2> %s </h2>
+	Name: %s <br>
+	Email: %s <br>
+	<br>
+	%s`, title, order.Name, order.Email, bottomPortion)
+}
+
+
 func createEmail(order Order) *mail.SGMailV3 {
 	from := mail.NewEmail("Lizard Clothing", "dpaez97@gmail.com")
 	subject := "Lizard Clothing Special Order"
 	to := mail.NewEmail(order.Name, order.Email)
-	plainTextContent := order.Message
-	htmlContent := order.Message
+	message := createMessage(order)
+	plainTextContent := message
+	htmlContent := message
 	singleEmail := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
 	
 	owner := mail.NewEmail("Danny Paez", "dpaez2@illinois.edu")
