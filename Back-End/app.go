@@ -11,15 +11,20 @@ import (
 	"github.com/rs/cors"
 )
 
-type Order struct {
-	Name		string `json:name`
-	Email		string `json:email`
-	Message		string `json:message`
+type OrderDetails struct {
 	ProductType	string `json:productType`
 	ProductName	string `json:productName`
 	Size		string `json:size`
 	Gender		string `json:gender`
 	Color		string `json:color`
+}
+
+type Order struct {
+	Name			string 			`json:name`
+	Email			string 			`json:email`
+	Message			string 			`json:message`
+	SpecialOrder 	bool			`json:specialOrder`
+	Details			OrderDetails 	`json:orderDetails`
 }
 
 type Response struct {
