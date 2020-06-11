@@ -28,6 +28,23 @@ type Response struct {
 }
 
 
+func createEmail(order Order) *mail.SGMailV3 {
+	from := mail.NewEmail("Lizard Clothing", "dpaez97@gmail.com")
+	subject := "Lizard Clothing Special Order"
+	to := mail.NewEmail(order.Name, order.Email)
+	plainTextContent := order.Message
+	htmlContent := order.Message
+	singleEmail := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
+	
+	owner := mail.NewEmail("Danny Paez", "dpaez2@illinois.edu")
+	p := mail.NewPersonalization()
+	p.AddTos(owner)
+	singleEmail.AddPersonalizations(p)
+	
+	return singleEmail
+}
+
+
 func sendOrder(w http.ResponseWriter, r *http.Request) {
 	var order Order
 	var resp Response
@@ -43,16 +60,10 @@ func sendOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// TODO
-	// send email also to Lizard Clothing owner
-	from := mail.NewEmail("Lizard Clothing", "dpaez97@gmail.com")
-	subject := "Lizard Clothing Special Order"
-	to := mail.NewEmail(order.Name, order.Email)
-	plainTextContent := order.Message
-	htmlContent := order.Message
-	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
+	// send email to Lizard Clothing owner and customer
 	client := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
-	response, err := client.Send(message)
+	singleEmail := createEmail(order)
+	response, err := client.Send(singleEmail)
 
 	if err != nil {
 		log.Println("Sendgrid Client Error:")
@@ -69,11 +80,12 @@ func sendOrder(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	mux := http.NewServeMux()
-	// TODO
-	// make sure API endpoint works for POST only
 	mux.HandleFunc("/sendOrder", sendOrder)
-
-	corsHandler := cors.Default().Handler(mux)
+	
+	options := cors.Options{
+		AllowedMethods: []string{"POST"},
+	}
+	corsHandler := cors.New(options).Handler(mux)
 	log.Fatal(http.ListenAndServe(":8000", corsHandler))
 }
 
