@@ -5,20 +5,20 @@ import {PROXY_URL} from '../misc/proxyURL';
 import './catalogItemPage.css';
 
 const sizeOptions = [
-    {key: 's', text: 'Small', value: 'small'},
-    {key: 'm', text: 'Medium', value: 'medium'},
-    {key: 'l', text: 'Large', value: 'large'}
+    {key: 's', text: 'Small', value: 'Small'},
+    {key: 'm', text: 'Medium', value: 'Medium'},
+    {key: 'l', text: 'Large', value: 'Large'}
 ];
 
 const genderOptions = [
-    {key: 'm', text: 'Male', value: 'male'},
-    {key: 'f', text: 'Female', value: 'female'}
+    {key: 'm', text: 'Male', value: 'Male'},
+    {key: 'f', text: 'Female', value: 'Female'}
 ];
 
 const colorOptions = [
-    {key: 'b', text: 'Blue', value: 'blue'},
-    {key: 'g', text: 'Green', value: 'green'},
-    {key: 'y', text: 'Yellow', value: 'yellow'}
+    {key: 'b', text: 'Blue', value: 'Blue'},
+    {key: 'g', text: 'Green', value: 'Green'},
+    {key: 'y', text: 'Yellow', value: 'Yellow'}
 ];
 
 export class CatalogItemPage extends Component {
@@ -66,7 +66,7 @@ export class CatalogItemPage extends Component {
         return msg;
     }
 
-    requestCatalogItem() {
+    async requestCatalogItem() {
         if (this.formNotFilledProperly())
             return;
 
