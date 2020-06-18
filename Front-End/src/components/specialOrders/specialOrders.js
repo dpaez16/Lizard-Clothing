@@ -8,9 +8,9 @@ export class SpecialOrders extends Component {
     constructor() {
         super();
         this.state = {
-            name: "",
-            email: "",
-            message: ""
+            name: undefined,
+            email: undefined,
+            message: undefined
         };
     }
 
@@ -21,8 +21,15 @@ export class SpecialOrders extends Component {
         return !validEmailRegex.test(this.state.email);
     }
 
+    invalidPhoneNum() {
+        const validPhoneNumRegex = RegExp(
+            /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g
+        );
+        return !validPhoneNumRegex.test(this.state.phoneNum);
+    }
+
     invalidForm() {
-        return this.state.name.length === 0 || this.state.message.length === 0 || this.invalidEmail();
+        return !(this.state.name && this.state.message) || this.invalidEmail() || this.invalidPhoneNum();
     }
 
     parseBody(rawBody) {
@@ -50,6 +57,7 @@ export class SpecialOrders extends Component {
             name: this.state.name,
             email: this.state.email,
             message: this.state.message,
+            phoneNum: this.state.phoneNum,
             specialOrder: true
         };
         const response = await fetch(PROXY_URL + '/sendOrder', {
@@ -95,6 +103,14 @@ export class SpecialOrders extends Component {
                                 label='Email'
                                 onChange={e => {
                                     this.setState({email: e.target.value});
+                                }}
+                    />
+                    <Form.Field id='form-input-control-error-phone-number'
+                                control={Input}
+                                required={true}
+                                label='Phone Number'
+                                onChange={e => {
+                                    this.setState({phoneNum: e.target.value});
                                 }}
                     />
                     <Form.Field id='form-textarea-control-message'

@@ -4,22 +4,6 @@ import history from './../../history';
 import {PROXY_URL} from '../misc/proxyURL';
 import './catalogItemPage.css';
 
-const sizeOptions = [
-    {key: 's', text: 'Small', value: 'Small'},
-    {key: 'm', text: 'Medium', value: 'Medium'},
-    {key: 'l', text: 'Large', value: 'Large'}
-];
-
-const genderOptions = [
-    {key: 'm', text: 'Male', value: 'Male'},
-    {key: 'f', text: 'Female', value: 'Female'}
-];
-
-const colorOptions = [
-    {key: 'b', text: 'Blue', value: 'Blue'},
-    {key: 'g', text: 'Green', value: 'Green'},
-    {key: 'y', text: 'Yellow', value: 'Yellow'}
-];
 
 export class CatalogItemPage extends Component {
     constructor(props) {
@@ -27,6 +11,8 @@ export class CatalogItemPage extends Component {
         
         const {itemNum} = this.props.match.params;
         const catalogItem = this.props.catalog[itemNum];
+
+        const {sizeOptions, colorOptions} = this.props.location.state;
         
         this.state = {
             itemType: this.props.itemType,
@@ -34,9 +20,11 @@ export class CatalogItemPage extends Component {
             image: catalogItem.image,
             size: undefined,
             color: undefined,
-            gender: undefined,
             name: undefined,
-            email: undefined
+            email: undefined,
+            phoneNum: undefined,
+            sizeOptions: sizeOptions,
+            colorOptions: colorOptions
         };
     }
 
@@ -48,8 +36,8 @@ export class CatalogItemPage extends Component {
     }
 
     formNotFilledProperly() {
-        const {name, size, color, gender} = this.state;
-        return !(name && this.validEmail() && size && color && gender);
+        const {name, size, color, phoneNum} = this.state;
+        return !(name && this.validEmail() && size && color && phoneNum);
     }
 
     parseBody(rawBody) {
@@ -74,12 +62,12 @@ export class CatalogItemPage extends Component {
             productType: this.state.itemType,
             productName: this.state.itemName,
             size: this.state.size,
-            gender: this.state.gender,
             color: this.state.color
         };
         const order = {
             name: this.state.name,
             email: this.state.email,
+            phoneNum: undefined,
             specialOrder: false,
             orderDetails: orderDetails
         };
@@ -137,10 +125,17 @@ export class CatalogItemPage extends Component {
                                     this.setState({email: e.target.value});
                                 }}
                             />
+                            <Form.Input
+                                required={true}
+                                label='Phone Number'
+                                onChange={e => {
+                                    this.setState({phoneNum: e.target.value});
+                                }}
+                            />
                             <Form.Select
                                 required={true}
                                 label='Size'
-                                options={sizeOptions}
+                                options={this.state.sizeOptions}
                                 placeholder='Size'
                                 onChange={(_, data) => {
                                     this.setState({size: data.value});
@@ -148,17 +143,8 @@ export class CatalogItemPage extends Component {
                             />
                             <Form.Select
                                 required={true}
-                                label='Gender'
-                                options={genderOptions}
-                                placeholder='Gender'
-                                onChange={(_, data) => {
-                                    this.setState({gender: data.value});
-                                }}
-                            />
-                            <Form.Select
-                                required={true}
                                 label='Color'
-                                options={colorOptions}
+                                options={this.state.colorOptions}
                                 placeholder='Color'
                                 onChange={(_, data) => {
                                     this.setState({color: data.value});

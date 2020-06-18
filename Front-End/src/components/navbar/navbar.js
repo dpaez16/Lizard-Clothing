@@ -18,12 +18,18 @@ export const NavBar = _ => {
                         <Dropdown text='Products'>
                             <Dropdown.Menu>
                                 <Dropdown.Item  
-                                    text='T-Shirts'
+                                    text='T-Shirts (Adult)'
                                     onMouseDown={() => history.push('/tshirts')} 
                                 />
+                                <Dropdown.Item
+                                    text='T-Shirts (Children)'
+                                />
                                 <Dropdown.Item  
-                                    text='Hoodies'
+                                    text='Hoodies (Adult)'
                                     onMouseDown={() => history.push('/hoodies')} 
+                                />
+                                <Dropdown.Item
+                                    text='Hoodies (Children)'
                                 />
                             </Dropdown.Menu>
                         </Dropdown>

@@ -10,7 +10,9 @@ export class CatalogItem extends Component {
             ID: this.props.ID,
             name: this.props.name,
             image: this.props.image,
-            catalogURL: this.props.catalogURL
+            catalogURL: this.props.catalogURL,
+            sizeOptions: this.props.sizeOptions,
+            colorOptions: this.props.colorOptions
         };
     }
 
@@ -24,7 +26,13 @@ export class CatalogItem extends Component {
         return (
             <div 
                 className='catalog-item'
-                onMouseDown={() => history.push(`/${this.state.catalogURL}/${this.state.ID}`)}
+                onMouseDown={() => history.push({
+                    pathname: `/${this.state.catalogURL}/${this.state.ID}`,
+                    state: {
+                        sizeOptions: this.state.sizeOptions,
+                        colorOptions: this.state.colorOptions
+                    }
+                })}
             >
                 <Image  
                     className='catalog-item__image'

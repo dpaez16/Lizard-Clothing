@@ -63,7 +63,7 @@ export default class App extends Component {
                                 path='/tshirts' 
                                 render={(props) => 
                                     <Catalog    
-                                        catalogName='T-Shirts'
+                                        catalogName='T-Shirts (Adults)'
                                         catalogList={this.state.tshirts}
                                         catalogURL='tshirts'
                                         { ...props }
@@ -86,7 +86,7 @@ export default class App extends Component {
                                 path='/hoodies' 
                                 render={(props) => 
                                     <Catalog    
-                                        catalogName='Hoodies'
+                                        catalogName='Hoodies (Adults)'
                                         catalogList={this.state.hoodies}
                                         catalogURL='hoodies'
                                         { ...props }

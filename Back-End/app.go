@@ -15,6 +15,7 @@ import (
 type Order struct {
 	Name			string 			`json:"name"`
 	Email			string 			`json:"email"`
+	PhoneNumber		string 			`json:"phoneNum"`
 	Message			string 			`json:"message"`
 	SpecialOrder 	bool			`json:"specialOrder"`
 	Details			OrderDetails 	`json:"orderDetails"`
@@ -24,7 +25,6 @@ type OrderDetails struct {
 	ProductType	string `json:"productType"`
 	ProductName	string `json:"productName"`
 	Size		string `json:"size"`
-	Gender		string `json:"gender"`
 	Color		string `json:"color"`
 }
 
@@ -52,14 +52,12 @@ func createEmailParts(order Order) (string, string) {
 			<li> Product Type: %s </li>
 			<li> Product Name: %s </li>
 			<li> Size: %s </li>
-			<li> Gender: %s </li>
 			<li> Color: %s </li>
 		</ul>
 		`, 
 		order.Details.ProductType, 
 		order.Details.ProductName,
 		order.Details.Size,
-		order.Details.Gender,
 		order.Details.Color)
 	}
 
@@ -74,8 +72,9 @@ func createMessage(order Order) string {
 	<h2> %s </h2>
 	Name: %s <br>
 	Email: %s <br>
+	Phone Number: %s <br>
 	<br>
-	%s`, title, order.Name, order.Email, bottomPortion)
+	%s`, title, order.Name, order.Email, order.PhoneNumber, bottomPortion)
 }
 
 
