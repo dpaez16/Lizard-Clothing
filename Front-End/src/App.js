@@ -60,19 +60,19 @@ export default class App extends Component {
                             />
                             <Route 
                                 exact
-                                path='/tshirts' 
+                                path='/tshirts/adult' 
                                 render={(props) => 
                                     <Catalog    
                                         catalogName='T-Shirts (Adults)'
                                         catalogList={this.state.tshirts}
-                                        catalogURL='tshirts'
+                                        catalogURL='tshirts/adult'
                                         { ...props }
                                     />
                                 }
                             />
                             <Route 
                                 exact
-                                path='/tshirts/:itemNum'
+                                path='/tshirts/adult/:itemNum'
                                 render={(props) => 
                                     <CatalogItemPage
                                         catalog={this.state.tshirts}
@@ -83,12 +83,12 @@ export default class App extends Component {
                             />
                             <Route 
                                 exact
-                                path='/hoodies' 
+                                path='/hoodies/adult' 
                                 render={(props) => 
                                     <Catalog    
                                         catalogName='Hoodies (Adults)'
                                         catalogList={this.state.hoodies}
-                                        catalogURL='hoodies'
+                                        catalogURL='hoodies/adult'
                                         { ...props }
                                     />
                                 }

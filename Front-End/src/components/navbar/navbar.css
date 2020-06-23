@@ -2,7 +2,7 @@
     left: 0;
     top: 0;
     width: 100%;
-    height: 3.5rem;
+    height: 4.5rem;
     background: rgb(53, 88, 118);
     padding: 0 1rem;
     display: flex;
@@ -51,4 +51,9 @@
 .instagram {
     color: white;
     font-size: 20px !important;
+}
+
+.navbar__icon {
+    width: 10%;
+    height: auto;
 }

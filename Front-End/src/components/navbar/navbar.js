@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import {Dropdown} from 'semantic-ui-react'
+import {Dropdown, Image} from 'semantic-ui-react'
 import history from './../../history';
 import './navbar.css';
 
@@ -9,7 +9,11 @@ export const NavBar = _ => {
         <header className='navbar'>
             <div className='navbar__icon'>
                 <h1>
-                    <NavLink to='/'>(Lizard Clothing Logo)</NavLink>
+                    <NavLink to='/'>
+                        <Image
+                            src={'../../lizard_clothing_logo.png'}
+                        />
+                    </NavLink>
                 </h1>
             </div>
             <nav className='navbar__items'>
@@ -19,17 +23,19 @@ export const NavBar = _ => {
                             <Dropdown.Menu>
                                 <Dropdown.Item  
                                     text='T-Shirts (Adult)'
-                                    onMouseDown={() => history.push('/tshirts')} 
+                                    onMouseDown={() => history.push('/tshirts/adult')} 
                                 />
                                 <Dropdown.Item
                                     text='T-Shirts (Children)'
+                                    onMouseDown={() => history.push('/tshirts/child')}
                                 />
                                 <Dropdown.Item  
                                     text='Hoodies (Adult)'
-                                    onMouseDown={() => history.push('/hoodies')} 
+                                    onMouseDown={() => history.push('/hoodies/adult')} 
                                 />
                                 <Dropdown.Item
                                     text='Hoodies (Children)'
+                                    onMouseDown={() => history.push('/hoodies/child')}
                                 />
                             </Dropdown.Menu>
                         </Dropdown>
