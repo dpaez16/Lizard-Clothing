@@ -6,41 +6,12 @@ import {HomePage} from './components/home/homePage';
 import {Catalog} from './components/catalog/catalog';
 import {CatalogItemPage} from './components/catalogItemPage/catalogItemPage';
 import {PostSendPage} from './components/postSendPage/postSendPage';
+import {products} from './components/misc/products';
 import history from './history';
 import './App.css';
 
 
-const tshirts = [
-    {
-        image: 'gallery/tshirt.jpg',
-        name: 'Shirt'
-    },
-    {
-        image: 'gallery/tshirt.jpg',
-        name: 'Shirt 2'
-    }
-];
-
-const hoodies = [
-    {
-        image: 'gallery/hoodie.jpg',
-        name: 'Hoodie'
-    },
-    {
-        image: 'gallery/hoodie.jpg',
-        name: 'Hoodie 2'
-    }
-];
-
 export default class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            tshirts: tshirts,
-            hoodies: hoodies
-        };
-    }
-
     render() {
         return (
             <Router history={history}>
@@ -64,7 +35,7 @@ export default class App extends Component {
                                 render={(props) => 
                                     <Catalog    
                                         catalogName='T-Shirts (Adults)'
-                                        catalogList={this.state.tshirts}
+                                        catalogList={products.tshirts}
                                         catalogURL='tshirts/adult'
                                         { ...props }
                                     />
@@ -75,7 +46,7 @@ export default class App extends Component {
                                 path='/tshirts/adult/:itemNum'
                                 render={(props) => 
                                     <CatalogItemPage
-                                        catalog={this.state.tshirts}
+                                        catalog={products.tshirts}
                                         itemType="T-Shirts"
                                         { ...props }
                                     />
@@ -87,7 +58,7 @@ export default class App extends Component {
                                 render={(props) => 
                                     <Catalog    
                                         catalogName='Hoodies (Adults)'
-                                        catalogList={this.state.hoodies}
+                                        catalogList={products.hoodies}
                                         catalogURL='hoodies/adult'
                                         { ...props }
                                     />
@@ -98,7 +69,7 @@ export default class App extends Component {
                                 path='/hoodies/:itemNum'
                                 render={(props) => 
                                     <CatalogItemPage
-                                        catalog={this.state.hoodies}
+                                        catalog={products.hoodies}
                                         itemType="Hoodies"
                                         { ...props }
                                     />
