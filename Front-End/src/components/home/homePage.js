@@ -17,9 +17,10 @@ export const HomePage = _ => {
 
     return (
         <div className='home-page'>
-            <Header size='huge'>
-                (Lizard Clothing Logo)
-            </Header>
+            <Image
+                className='home-page__logo'
+                src={'../../lizard_clothing_logo.png'}
+            />
             <p>
                 (Lizard Clothing Description)
             </p>

@@ -4,6 +4,11 @@
     font-size: 16px;
 }
 
+.home-page__logo {
+    width: 25%;
+    height: auto;
+}
+
 .gallery {
     display: flex;
     flex-wrap: wrap;
