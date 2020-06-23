@@ -34,7 +34,7 @@ export default class App extends Component {
                                 path='/tshirts/adult' 
                                 render={(props) => 
                                     <Catalog    
-                                        catalogName='T-Shirts (Adults)'
+                                        catalogName='T-Shirts (Adult)'
                                         catalogList={products.tshirts}
                                         catalogURL='tshirts/adult'
                                         { ...props }
@@ -47,7 +47,30 @@ export default class App extends Component {
                                 render={(props) => 
                                     <CatalogItemPage
                                         catalog={products.tshirts}
-                                        itemType="T-Shirts"
+                                        itemType="T-Shirts (Adult)"
+                                        { ...props }
+                                    />
+                                }
+                            />
+                            <Route 
+                                exact
+                                path='/tshirts/child' 
+                                render={(props) => 
+                                    <Catalog    
+                                        catalogName='T-Shirts (Child)'
+                                        catalogList={products.tshirts}
+                                        catalogURL='tshirts/child'
+                                        { ...props }
+                                    />
+                                }
+                            />
+                            <Route 
+                                exact
+                                path='/tshirts/child/:itemNum'
+                                render={(props) => 
+                                    <CatalogItemPage
+                                        catalog={products.tshirts}
+                                        itemType="T-Shirts (Child)"
                                         { ...props }
                                     />
                                 }
@@ -57,7 +80,7 @@ export default class App extends Component {
                                 path='/hoodies/adult' 
                                 render={(props) => 
                                     <Catalog    
-                                        catalogName='Hoodies (Adults)'
+                                        catalogName='Hoodies (Adult)'
                                         catalogList={products.hoodies}
                                         catalogURL='hoodies/adult'
                                         { ...props }
@@ -66,11 +89,34 @@ export default class App extends Component {
                             />
                             <Route 
                                 exact
-                                path='/hoodies/:itemNum'
+                                path='/hoodies/adult/:itemNum'
                                 render={(props) => 
                                     <CatalogItemPage
                                         catalog={products.hoodies}
-                                        itemType="Hoodies"
+                                        itemType="Hoodies (Adult)"
+                                        { ...props }
+                                    />
+                                }
+                            />
+                            <Route 
+                                exact
+                                path='/hoodies/child' 
+                                render={(props) => 
+                                    <Catalog    
+                                        catalogName='Hoodies (Child)'
+                                        catalogList={products.hoodies}
+                                        catalogURL='hoodies/child'
+                                        { ...props }
+                                    />
+                                }
+                            />
+                            <Route 
+                                exact
+                                path='/hoodies/child/:itemNum'
+                                render={(props) => 
+                                    <CatalogItemPage
+                                        catalog={products.hoodies}
+                                        itemType="Hoodies (Child)"
                                         { ...props }
                                     />
                                 }

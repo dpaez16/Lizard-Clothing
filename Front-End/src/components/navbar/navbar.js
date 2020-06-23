@@ -26,7 +26,7 @@ export const NavBar = _ => {
                                     onMouseDown={() => history.push('/tshirts/adult')} 
                                 />
                                 <Dropdown.Item
-                                    text='T-Shirts (Children)'
+                                    text='T-Shirts (Child)'
                                     onMouseDown={() => history.push('/tshirts/child')}
                                 />
                                 <Dropdown.Item  
@@ -34,7 +34,7 @@ export const NavBar = _ => {
                                     onMouseDown={() => history.push('/hoodies/adult')} 
                                 />
                                 <Dropdown.Item
-                                    text='Hoodies (Children)'
+                                    text='Hoodies (Child)'
                                     onMouseDown={() => history.push('/hoodies/child')}
                                 />
                             </Dropdown.Menu>

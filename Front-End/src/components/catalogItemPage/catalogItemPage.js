@@ -96,6 +96,9 @@ export class CatalogItemPage extends Component {
     render() {
         return (
             <div className='catalog-item-page'>
+                <Header size='huge'>
+                    {this.state.itemType}
+                </Header>
                 <div className='catalog-item-page__container'>
                     <div className='catalog-item-page__metadata'>
                         <Image src={`../../${this.state.image}`}/>

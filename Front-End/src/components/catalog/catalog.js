@@ -14,6 +14,14 @@ export class Catalog extends Component {
         }
     }
 
+    getItemType(catalogName) {
+        if (catalogName.toLowerCase().includes("adult")) {
+            return "Adult";
+        } else {
+            return "Child";
+        }
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -21,7 +29,8 @@ export class Catalog extends Component {
             catalogList: this.props.catalogList,
             catalogURL: this.props.catalogURL,
             colorOptions: options.colorOptions,
-            sizeOptions: this.pickSizes(this.props.catalogName)           
+            sizeOptions: this.pickSizes(this.props.catalogName),
+            itemType: this.getItemType(this.props.catalogName)
         };
     }
 
@@ -29,7 +38,8 @@ export class Catalog extends Component {
         if (prevProps.catalogName !== this.props.catalogName) {
             this.setState(this.props);
             this.setState({
-                sizeOptions: this.pickSizes(this.props.catalogName)
+                sizeOptions: this.pickSizes(this.props.catalogName),
+                itemType: this.getItemType(this.props.catalogName)
             });
         }
     }
