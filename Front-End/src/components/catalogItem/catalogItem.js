@@ -36,7 +36,7 @@ export class CatalogItem extends Component {
             >
                 <Image  
                     className='catalog-item__image'
-                    src={this.state.image}
+                    src={`../../${this.state.image}`}
                     id={this.state.ID}
                 />
                 <p className='catalog-item__text'>
