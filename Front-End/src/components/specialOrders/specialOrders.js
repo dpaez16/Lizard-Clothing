@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Form, Input, TextArea, Button, Header } from 'semantic-ui-react';
 import history from './../../history';
+import {validEmail, validPhoneNum} from './../misc/helpers';
 import {PROXY_URL} from '../misc/proxyURL';
 import './specialOrders.css';
 
@@ -10,26 +11,19 @@ export class SpecialOrders extends Component {
         this.state = {
             name: undefined,
             email: undefined,
-            message: undefined
+            message: undefined,
+            phoneNum: undefined
         };
     }
 
-    invalidEmail() {
-        const validEmailRegex = RegExp(
-            /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-        );
-        return !validEmailRegex.test(this.state.email);
-    }
-
-    invalidPhoneNum() {
-        const validPhoneNumRegex = RegExp(
-            /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g
-        );
-        return !validPhoneNumRegex.test(this.state.phoneNum);
-    }
-
     invalidForm() {
-        return !(this.state.name && this.state.message) || this.invalidEmail() || this.invalidPhoneNum();
+        const {name, email, message, phoneNum} = this.state;
+        return !(
+            name &&
+            validEmail(email) &&
+            message &&
+            validPhoneNum(phoneNum)
+        );
     }
 
     parseBody(rawBody) {

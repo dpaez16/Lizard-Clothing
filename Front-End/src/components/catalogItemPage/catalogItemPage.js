@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Form, Button, Header, Image} from 'semantic-ui-react';
 import history from './../../history';
+import {validEmail, validPhoneNum} from './../misc/helpers';
 import {PROXY_URL} from '../misc/proxyURL';
 import './catalogItemPage.css';
 
@@ -28,16 +29,15 @@ export class CatalogItemPage extends Component {
         };
     }
 
-    validEmail() {
-        const validEmailRegex = RegExp(
-            /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-        );
-        return validEmailRegex.test(this.state.email);
-    }
-
     formNotFilledProperly() {
-        const {name, size, color, phoneNum} = this.state;
-        return !(name && this.validEmail() && size && color && phoneNum);
+        const {name, size, color, email, phoneNum} = this.state;
+        return !(
+            name && 
+            validEmail(email) && 
+            size && 
+            color && 
+            validPhoneNum(phoneNum)
+        );
     }
 
     parseBody(rawBody) {
