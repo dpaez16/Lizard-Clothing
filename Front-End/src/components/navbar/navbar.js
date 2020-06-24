@@ -19,7 +19,10 @@ export const NavBar = _ => {
             <nav className='navbar__items'>
                 <ul>
                     <li>
-                        <Dropdown text='Products'>
+                        <Dropdown 
+                            className='navbar__items__dropdown'
+                            text='Products'
+                        >
                             <Dropdown.Menu>
                                 <Dropdown.Item  
                                     text='T-Shirts (Adult)'

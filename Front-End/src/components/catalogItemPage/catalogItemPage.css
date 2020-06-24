@@ -27,3 +27,7 @@
     flex-direction: column;
     margin-left: 5%;
 }
+
+.catalog-item-page__form > .dropdown {
+    width: 20px;
+}

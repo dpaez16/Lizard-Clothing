@@ -18,7 +18,7 @@
 .navbar__icon a:hover,
 .navbar__icon a:active,
 .navbar__icon a.active {
-    color: black;
+    color: white;
 }
 
 .navbar__items {
@@ -42,7 +42,7 @@
 }
 
 .navbar__items a:hover,
-.dropdown,
+.navbar__items__dropdown,
 .navbar__items a:active,
 .navbar__items a.active {
     color: white;
