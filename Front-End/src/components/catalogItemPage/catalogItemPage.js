@@ -115,6 +115,7 @@ export class CatalogItemPage extends Component {
                     <div className='catalog-item-page__form'>
                         <Form>
                             <Form.Input
+                                className='catalog-item-page__form__text'
                                 required={true}
                                 label='Name'
                                 onChange={e => {
@@ -122,6 +123,7 @@ export class CatalogItemPage extends Component {
                                 }}
                             />
                             <Form.Input
+                                className='catalog-item-page__form__text'
                                 required={true}
                                 label='Email'
                                 onChange={e => {
@@ -129,6 +131,7 @@ export class CatalogItemPage extends Component {
                                 }}
                             />
                             <Form.Input
+                                className='catalog-item-page__form__text'
                                 required={true}
                                 label='Phone Number'
                                 onChange={e => {
@@ -136,6 +139,7 @@ export class CatalogItemPage extends Component {
                                 }}
                             />
                             <Form.Select
+                                className='catalog-item-page__form__dropdown'
                                 required={true}
                                 label='Size'
                                 options={this.state.sizeOptions}
@@ -145,6 +149,7 @@ export class CatalogItemPage extends Component {
                                 }}
                             />
                             <Form.Select
+                                className='catalog-item-page__form__dropdown'
                                 required={true}
                                 label='Color'
                                 options={this.state.colorOptions}

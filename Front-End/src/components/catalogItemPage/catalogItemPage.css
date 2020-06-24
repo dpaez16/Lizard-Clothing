@@ -28,6 +28,11 @@
     margin-left: 5%;
 }
 
-.catalog-item-page__form > .dropdown {
-    width: 20px;
+.catalog-item-page__form__text {
+    width: 14em !important;
+}
+
+.catalog-item-page__form__dropdown > .ui.selection.dropdown {
+    width: 10em !important;
+    min-width: 10em !important;
 }
