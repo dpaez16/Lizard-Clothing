@@ -44,8 +44,6 @@ export class SpecialOrders extends Component {
         if (this.invalidForm())
             return;
         
-        // TODO
-        // make PROXY_URL
         // Backend will send information in email
         const order = {
             name: this.state.name,
@@ -54,6 +52,7 @@ export class SpecialOrders extends Component {
             phoneNum: this.state.phoneNum,
             specialOrder: true
         };
+
         const response = await fetch(PROXY_URL + '/sendOrder', {
             method: 'POST',
             headers: {

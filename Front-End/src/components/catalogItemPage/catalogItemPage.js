@@ -67,7 +67,7 @@ export class CatalogItemPage extends Component {
         const order = {
             name: this.state.name,
             email: this.state.email,
-            phoneNum: undefined,
+            phoneNum: this.state.phoneNum,
             specialOrder: false,
             orderDetails: orderDetails
         };
