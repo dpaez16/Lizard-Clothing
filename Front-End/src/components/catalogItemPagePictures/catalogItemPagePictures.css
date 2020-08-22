@@ -1,0 +1,9 @@
+.catalog-item-page-pictures__main {
+    border-style: solid;
+    max-height: 400px !important;
+    width: auto;
+}
+
+.catalog-item-page-pictures__previews {
+    display: flex;
+}

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Form, Button, Header, Image} from 'semantic-ui-react';
 import history from './../../history';
+import {CatalogItemPagePictures} from './../catalogItemPagePictures/catalogItemPagePictures';
 import {validEmail, validPhoneNum} from './../misc/helpers';
 import {PROXY_URL} from '../misc/proxyURL';
 import './catalogItemPage.css';
@@ -14,11 +15,18 @@ export class CatalogItemPage extends Component {
         const catalogItem = this.props.catalog[itemNum];
 
         const {sizeOptions, colorOptions} = this.props.location.state;
+        const images = [
+            "../../../gallery/tshirt.jpg",
+            "../../../gallery/hoodie.jpg",
+            "../../../gallery/tshirt.jpg",
+            "../../../gallery/hoodie.jpg"
+        ];
         
         this.state = {
             itemType: this.props.itemType,
             itemName: catalogItem.name,
             image: catalogItem.image,
+            images: images,
             size: undefined,
             color: undefined,
             name: undefined,
@@ -101,7 +109,9 @@ export class CatalogItemPage extends Component {
                 </Header>
                 <div className='catalog-item-page__container'>
                     <div className='catalog-item-page__metadata'>
-                        <Image src={`../../${this.state.image}`}/>
+                        <CatalogItemPagePictures
+                            images={this.state.images}
+                        />
                         <p className='item-metadata__name'>
                             <b>{this.state.itemName}</b>
                         </p>

@@ -10,12 +10,6 @@
     display: flex;
 }
 
-.catalog-item-page__metadata > img {
-    border-style: solid;
-    max-height: 400px !important;
-    width: auto;
-}
-
 .item-metadata__name {
     text-align: center;
     margin-top: 5%;
