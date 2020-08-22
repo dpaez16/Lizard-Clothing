@@ -13,6 +13,10 @@ export class CatalogItemPagePictures extends Component {
         };
     }
 
+    clickPreviewImage(i) {
+        this.setState({idx: i});
+    }
+
     render() {
         return (
             <div className='catalog-item-page-pictures'>
@@ -23,10 +27,12 @@ export class CatalogItemPagePictures extends Component {
                 />
                 <div className='catalog-item-page-pictures__previews'>
                     {this.state.images.map((image, i) => {
-                        const className = i == this.state.idx ? 'catalog-item-page-pictures__clicked' : 'catalog-item-page-pictures__not-clicked';
+                        const clickState = i == this.state.idx ? 'clicked' : 'not-clicked';
+                        const className = `catalog-item-page-pictures__${clickState}`
                         return (
                             <Image
                                 className={className}
+                                onMouseDown={() => this.clickPreviewImage(i)}
                                 src={image}
                                 id={i}
                             />

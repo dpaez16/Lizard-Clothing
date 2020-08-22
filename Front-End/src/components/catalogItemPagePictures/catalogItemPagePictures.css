@@ -6,4 +6,20 @@
 
 .catalog-item-page-pictures__previews {
     display: flex;
+    padding-top: 2em;
+}
+
+.catalog-item-page-pictures__previews > img {
+    border-style: solid;
+    border-width: thin;
+    width: auto;
+    max-height: 7em !important;
+}
+
+.catalog-item-page-pictures__clicked {
+    opacity: 0.5;
+}
+
+.catalog-item-page-pictures__not-clicked {
+    opacity: 1.0;
 }
