@@ -109,12 +109,12 @@ export class CatalogItemPage extends Component {
                 </Header>
                 <div className='catalog-item-page__container'>
                     <div className='catalog-item-page__metadata'>
-                        <CatalogItemPagePictures
-                            images={this.state.images}
-                        />
                         <p className='item-metadata__name'>
                             <b>{this.state.itemName}</b>
                         </p>
+                        <CatalogItemPagePictures
+                            images={this.state.images}
+                        />
                         <Header size='large'>
                             <u>Description</u>
                         </Header>
