@@ -12,13 +12,19 @@ import (
 	"github.com/rs/cors"
 )
 
+var LIZARD_CLOTHING_SALES_NAME = os.Getenv("LIZARD_CLOTHING_SALES_NAME")
+var LIZARD_CLOTHING_SALES_EMAIL = os.Getenv("LIZARD_CLOTHING_SALES_EMAIL")
+var LIZARD_CLOTHING_OWNER_NAME = os.Getenv("LIZARD_CLOTHING_OWNER_NAME")
+var LIZARD_CLOTHING_OWNER_EMAIL = os.Getenv("LIZARD_CLOTHING_OWNER_EMAIL")
+var SENDGRID_API_KEY = os.Getenv("SENDGRID_API_KEY")
+
 type Order struct {
-	Name			string 			`json:"name"`
-	Email			string 			`json:"email"`
-	PhoneNumber		string 			`json:"phoneNum"`
-	Message			string 			`json:"message"`
-	SpecialOrder 	bool			`json:"specialOrder"`
-	Details			OrderDetails 	`json:"orderDetails"`
+	Name			string			`json:"name"`
+	Email			string			`json:"email"`
+	PhoneNumber		string			`json:"phoneNum"`
+	Message			string			`json:"message"`
+	SpecialOrder            bool			`json:"specialOrder"`
+	Details			OrderDetails		`json:"orderDetails"`
 }
 
 type OrderDetails struct {
@@ -54,8 +60,8 @@ func createEmailParts(order Order) (string, string) {
 			<li> Size: %s </li>
 			<li> Color: %s </li>
 		</ul>
-		`, 
-		order.Details.ProductType, 
+		`,
+		order.Details.ProductType,
 		order.Details.ProductName,
 		order.Details.Size,
 		order.Details.Color)
@@ -77,21 +83,29 @@ func createMessage(order Order) string {
 	%s`, title, order.Name, order.Email, order.PhoneNumber, bottomPortion)
 }
 
+func getSubject(specialOrder bool) string {
+	if specialOrder {
+		return "Lizard Clothing Special Order"
+	} else {
+		return "Lizard Clothing Order"
+	}
+}
+
 
 func createEmail(order Order) *mail.SGMailV3 {
-	from := mail.NewEmail("Lizard Clothing", "dpaez97@gmail.com")
-	subject := "Lizard Clothing Special Order"
+	from := mail.NewEmail(LIZARD_CLOTHING_SALES_NAME, LIZARD_CLOTHING_SALES_EMAIL)
+	subject := getSubject(order.SpecialOrder)
 	to := mail.NewEmail(order.Name, order.Email)
 	message := createMessage(order)
 	plainTextContent := message
 	htmlContent := message
 	singleEmail := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
-	
-	owner := mail.NewEmail("Danny Paez", "dpaez2@illinois.edu")
+
+	owner := mail.NewEmail(LIZARD_CLOTHING_OWNER_NAME, LIZARD_CLOTHING_OWNER_EMAIL)
 	p := mail.NewPersonalization()
 	p.AddTos(owner)
 	singleEmail.AddPersonalizations(p)
-	
+
 	return singleEmail
 }
 
@@ -112,7 +126,7 @@ func sendOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// send email to Lizard Clothing owner and customer
-	client := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
+	client := sendgrid.NewSendClient(SENDGRID_API_KEY)
 	singleEmail := createEmail(order)
 	response, err := client.Send(singleEmail)
 
@@ -132,7 +146,7 @@ func sendOrder(w http.ResponseWriter, r *http.Request) {
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/sendOrder", sendOrder)
-	
+
 	options := cors.Options{
 		AllowedMethods: []string{"POST"},
 	}
