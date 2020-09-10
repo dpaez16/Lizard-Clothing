@@ -11,11 +11,13 @@ import (
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )
 
+
 var LIZARD_CLOTHING_SALES_NAME = os.Getenv("LIZARD_CLOTHING_SALES_NAME")
 var LIZARD_CLOTHING_SALES_EMAIL = os.Getenv("LIZARD_CLOTHING_SALES_EMAIL")
 var LIZARD_CLOTHING_OWNER_NAME = os.Getenv("LIZARD_CLOTHING_OWNER_NAME")
 var LIZARD_CLOTHING_OWNER_EMAIL = os.Getenv("LIZARD_CLOTHING_OWNER_EMAIL")
 var SENDGRID_API_KEY = os.Getenv("SENDGRID_API_KEY")
+
 
 type Order struct {
 	Name			string			`json:"name"`
