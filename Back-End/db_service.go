@@ -20,12 +20,12 @@ var DB_NAME = "lizardClothingDB"
 var COLLECTION_NAME = "catalog"
 
 type Product struct {
-	ProductName		string		`json:"productName"`
-	ProductType		string		`json:"productType"`
-	ProductAgeType	string		`json:"productAgeType"`
-	Price			float32		`json:"price"`
-	Description		string		`json:"description"`
-	Images			[]string	`json:"images"`
+	ProductName		string		`json:"productName" bson:"productName"`
+	ProductType		string		`json:"productType" bson:"productType"`
+	ProductAgeType	string		`json:"productAgeType" bson:"productTypeAge"`
+	Price			float32		`json:"price" bson:"price"`
+	Description		string		`json:"description" bson:"description"`
+	Images			[]string	`json:"images" bson:"images"`
 }
 
 
@@ -40,10 +40,7 @@ func getDBClient() (*mongo.Client, error) {
 	ctx, cancel := getContext(10)
 	defer cancel()
 
-	url := fmt.Sprintf(`
-		mongodb+srv://%s:%s@lizard-clothing
-		.i89ud.mongodb.net/%s?retryWrites=
-		true&w=majority`, DB_USER, DB_PASSWORD, DB_NAME)
+	url := fmt.Sprintf("mongodb+srv://%s:%s@lizard-clothing.i89ud.mongodb.net/%s?retryWrites=true&w=majority", DB_USER, DB_PASSWORD, DB_NAME)
 
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(url,))
 	return client, err
