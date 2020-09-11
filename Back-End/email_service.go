@@ -111,7 +111,7 @@ func createEmail(order Order) *mail.SGMailV3 {
 }
 
 
-func sendOrder(w http.ResponseWriter, r *http.Request) {
+func SendOrder(w http.ResponseWriter, r *http.Request) {
 	var order Order
 	var resp Response
 
