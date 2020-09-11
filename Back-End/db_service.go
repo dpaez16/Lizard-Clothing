@@ -30,7 +30,7 @@ type Product struct {
 
 
 func getContext(nSeconds int) (context.Context, context.CancelFunc) {
-	duration := nSeconds * time.Second
+	duration := time.Duration(nSeconds) * time.Second
 	ctx, cancel := context.WithTimeout(context.Background(), duration)
 	return ctx, cancel
 }
