@@ -20,12 +20,12 @@ var DB_NAME = "lizardClothingDB"
 var COLLECTION_NAME = "catalog"
 
 type Product struct {
-	ProductName		string
-	ProductType		string
-	ProductAgeType	string
-	Price			float32
-	Description		string
-	Images			[]string
+	ProductName		string		`json:"productName"`
+	ProductType		string		`json:"productType"`
+	ProductAgeType	string		`json:"productAgeType"`
+	Price			float32		`json:"price"`
+	Description		string		`json:"description"`
+	Images			[]string	`json:"images"`
 }
 
 
@@ -50,16 +50,37 @@ func getDBClient() (*mongo.Client, error) {
 }
 
 
-//func insertProduct() () {}
-//func queryCatalog() () {}
-
-
-func main() {
+func InsertProduct(product Product) (*mongo.InsertOneResult, error) {
 	client, err := getDBClient()
-
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	collection := client.Database(DB_NAME).Collection(COLLECTION_NAME)
+
+	ctx, cancel := getContext(10)
+	defer cancel()
+
+	result, err := collection.InsertOne(ctx, product)
+	return result, err
+}
+//func QueryCatalog() () {}
+
+
+func main() {
+	product := Product {
+		ProductName: "Grand & Central",
+		ProductType: "Hoodie",
+		ProductAgeType: "Adult",
+		Price: 1.00,
+		Description: "desc",
+		Images: []string{"1", "2"},
+	}
+	
+	result, err := InsertProduct(product)
+	if err != nil {
+		log.Println(err)
+	}
+
+	fmt.Println("InsertOne() API result:", result)
 }
