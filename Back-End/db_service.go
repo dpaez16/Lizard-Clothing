@@ -30,15 +30,6 @@ type Product struct {
 	Images			[]string				`json:"images" bson:"images"`
 }
 
-type MongoFields struct {
-	Key 			string 					`json:"key,omitempty"`
-	ID 				primitive.ObjectID 		`bson:"_id, omitempty"`
-	
-	StringField 	string 					`bson:"string field" json:"string field"`
-	IntField 		int 					`bson:"int field" json:"int field"`
-	BoolField 		bool 					`bson:"bool field" json:"bool field"`
-}
-
 
 func getContext(nSeconds int) (context.Context, context.CancelFunc) {
 	duration := time.Duration(nSeconds) * time.Second
@@ -66,7 +57,7 @@ func InsertProduct(product Product) (*mongo.InsertOneResult, error) {
 
 	collection := client.Database(DB_NAME).Collection(COLLECTION_NAME)
 
-	ctx, cancel := getContext(10)
+	ctx, cancel := getContext(15)
 	defer cancel()
 
 	// check to see if product already exists
@@ -85,13 +76,39 @@ func InsertProduct(product Product) (*mongo.InsertOneResult, error) {
 	result, err := collection.InsertOne(ctx, product)
 	return result, err
 }
-//func QueryCatalog() () {}
+
+
+func QueryCatalog() ([]Product, error) {
+	client, err := getDBClient()
+	if err != nil {
+		return nil, err
+	}
+
+	collection := client.Database(DB_NAME).Collection(COLLECTION_NAME)
+
+	ctx, cancel := getContext(15)
+	defer cancel()
+
+	cursor, findErr := collection.Find(ctx, bson.M{})
+	if findErr != nil {
+		return nil, findErr
+	}
+
+	var products []Product
+	err = cursor.All(ctx, &products)
+	if err != nil {
+		return nil, err
+	}
+
+	return products, nil
+}
 
 
 func main() {
+	/*
 	product := Product {
 		ID: primitive.NewObjectID(),
-		ProductName: "Grand & Central",
+		ProductName: "Grand & Central 2",
 		ProductType: "Hoodie",
 		ProductAgeType: "Adult",
 		Price: 1.00,
@@ -105,4 +122,11 @@ func main() {
 	}
 
 	fmt.Println("InsertOne() API result:", result)
+	*/
+	products, err := QueryCatalog()
+	if err != nil {
+		log.Println(err)
+	}
+
+	fmt.Println(products)
 }
