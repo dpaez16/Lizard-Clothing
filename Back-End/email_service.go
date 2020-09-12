@@ -19,28 +19,6 @@ var LIZARD_CLOTHING_OWNER_EMAIL = os.Getenv("LIZARD_CLOTHING_OWNER_EMAIL")
 var SENDGRID_API_KEY = os.Getenv("SENDGRID_API_KEY")
 
 
-type Order struct {
-	Name			string			`json:"name"`
-	Email			string			`json:"email"`
-	PhoneNumber		string			`json:"phoneNum"`
-	Message			string			`json:"message"`
-	SpecialOrder            bool			`json:"specialOrder"`
-	Details			OrderDetails		`json:"orderDetails"`
-}
-
-type OrderDetails struct {
-	ProductType	string `json:"productType"`
-	ProductName	string `json:"productName"`
-	Size		string `json:"size"`
-	Color		string `json:"color"`
-}
-
-type Response struct {
-	StatusCode	int
-	Body		string
-}
-
-
 func createEmailParts(order Order) (string, string) {
 	var title, bottomPortion string
 	if order.SpecialOrder {
@@ -119,10 +97,7 @@ func SendOrder(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&order)
 	if err != nil {
 		log.Println("JSON Decode Error:")
-		log.Println(err)
-		resp.StatusCode = http.StatusBadRequest
-		resp.Body = err.Error()
-		json.NewEncoder(w).Encode(resp)
+		RecordError(w, r, resp, err)
 		return
 	}
 
