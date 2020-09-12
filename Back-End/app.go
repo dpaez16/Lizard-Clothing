@@ -8,8 +8,6 @@ import (
 
 
 func main() {
-	//products, err := 
-
 	mux := http.NewServeMux()
 	mux.HandleFunc("/sendOrder", SendOrder)
 

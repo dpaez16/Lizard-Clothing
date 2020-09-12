@@ -41,7 +41,7 @@ func getDBClient() (*mongo.Client, error) {
 }
 
 
-func queryCatalog(productType string, productAgeType string) ([]Product, error) {
+func GetCatalogHelper(productType string, productAgeType string) ([]Product, error) {
 	client, err := getDBClient()
 	if err != nil {
 		return nil, err
@@ -147,7 +147,7 @@ func GetCatalog(w http.ResponseWriter, r *http.Request) {
 	}
 
 	filter := inputData.Input
-	products, err := queryCatalog(filter.ProductType, filter.ProductAgeType)
+	products, err := GetCatalogHelper(filter.ProductType, filter.ProductAgeType)
 	if err != nil {
 		RecordError(w, r, resp, err)
 		return
@@ -155,11 +155,20 @@ func GetCatalog(w http.ResponseWriter, r *http.Request) {
 
 	// TODO
 	// TEST THIS
-	bytes, err := json.Marshal(products)
+	productsStr := fmt.Sprintf("%+v", products)
 	if err != nil {
 		fmt.Println(err)
 	}
 	resp.StatusCode = 200
-	resp.Body = string(bytes)
+	resp.Body = productsStr
 	json.NewEncoder(w).Encode(resp)
+}
+
+func main() {
+	products, _ := queryCatalog("Hoodie", "Adult")
+	
+	// TODO
+	// TEST THIS
+	productsStr := fmt.Sprintf("%+v", products)
+	fmt.Println(productsStr)
 }
