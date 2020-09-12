@@ -1,7 +1,7 @@
 CC=go
 CC_FLAGS=build
 
-backend_app: app.go email_service.go
+backend_app: app.go email_service.go db_service.go
 	$(CC) $(CC_FLAGS) -o $(@) $(^)
 
 clean:

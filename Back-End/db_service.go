@@ -7,7 +7,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"fmt"
-	"log"
 	"os"
 	"context"
 	"errors"
@@ -103,30 +102,3 @@ func QueryCatalog() ([]Product, error) {
 	return products, nil
 }
 
-
-func main() {
-	/*
-	product := Product {
-		ID: primitive.NewObjectID(),
-		ProductName: "Grand & Central 2",
-		ProductType: "Hoodie",
-		ProductAgeType: "Adult",
-		Price: 1.00,
-		Description: "desc",
-		Images: []string{"1", "2"},
-	}
-	
-	result, err := InsertProduct(product)
-	if err != nil {
-		log.Println(err)
-	}
-
-	fmt.Println("InsertOne() API result:", result)
-	*/
-	products, err := QueryCatalog()
-	if err != nil {
-		log.Println(err)
-	}
-
-	fmt.Println(products)
-}
