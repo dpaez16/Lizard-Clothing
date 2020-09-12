@@ -30,6 +30,28 @@ func getContext(nSeconds int) (context.Context, context.CancelFunc) {
 }
 
 
+func serializeProducts(products []Product) (string, error) {
+	var productsStr string
+
+	for i, product := range products {
+		productBytes, err := json.Marshal(product)
+		if err != nil {
+			return productsStr, err
+		}
+
+		productStr := string(productBytes)
+		if i + 1 < len(products) {
+			productStr += ", "
+		}
+
+		productsStr += productStr
+	}
+
+	productsStr = fmt.Sprintf("[%s]", productsStr)
+	return productsStr, nil
+}
+
+
 func getDBClient() (*mongo.Client, error) {
 	ctx, cancel := getContext(10)
 	defer cancel()
@@ -41,7 +63,7 @@ func getDBClient() (*mongo.Client, error) {
 }
 
 
-func GetCatalogHelper(productType string, productAgeType string) ([]Product, error) {
+func getCatalogHelper(productType string, productAgeType string) ([]Product, error) {
 	client, err := getDBClient()
 	if err != nil {
 		return nil, err
@@ -128,28 +150,6 @@ func InsertProduct(w http.ResponseWriter, r *http.Request) {
 }
 
 
-func serializeProducts(products []Product) (string, error) {
-	var productsStr string
-
-	for i, product := range products {
-		productBytes, err := json.Marshal(product)
-		if err != nil {
-			return productsStr, err
-		}
-
-		productStr := string(productBytes)
-		if i + 1 < len(products) {
-			productStr += ", "
-		}
-
-		productsStr += productStr
-	}
-
-	productsStr = fmt.Sprintf("[%s]", productsStr)
-	return productsStr, nil
-}
-
-
 func GetCatalog(w http.ResponseWriter, r *http.Request) {
 	var resp Response
 	var inputData InputData
@@ -169,7 +169,7 @@ func GetCatalog(w http.ResponseWriter, r *http.Request) {
 	}
 
 	filter := inputData.Input
-	products, err := GetCatalogHelper(filter.ProductType, filter.ProductAgeType)
+	products, err := getCatalogHelper(filter.ProductType, filter.ProductAgeType)
 	if err != nil {
 		RecordError(w, r, resp, err)
 		return

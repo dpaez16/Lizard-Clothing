@@ -11,6 +11,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/sendOrder", SendOrder)
 	mux.HandleFunc("/products", GetCatalog)
+	mux.HandleFunc("/insertProduct", InsertProduct)
 
 	options := cors.Options{
 		AllowedMethods: []string{"POST"},
