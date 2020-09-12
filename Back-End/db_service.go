@@ -20,7 +20,7 @@ var DB_USER = os.Getenv("DB_USER")
 var DB_PASSWORD = os.Getenv("DB_PASSWORD")
 var DB_NAME = "lizardClothingDB"
 var COLLECTION_NAME = "catalog"
-var LC_API_TOKEN = os.Getenv("LC_API_TOKEN")
+var LC_API_KEY = os.Getenv("LC_API_KEY")
 
 
 func getContext(nSeconds int) (context.Context, context.CancelFunc) {
@@ -82,9 +82,9 @@ func InsertProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token := inputData.Token
-	if token != LC_API_TOKEN {
-		err = errors.New("Invalid token.")
+	apiKey := inputData.APIKey
+	if apiKey != LC_API_KEY {
+		err = errors.New("Invalid API key.")
 		RecordError(w, r, resp, err)
 		return
 	}
@@ -113,7 +113,7 @@ func InsertProduct(w http.ResponseWriter, r *http.Request) {
 	if len(findResult.Images) > 0 {
 		err = errors.New("Product already exists!")
 		RecordError(w, r, resp, err)
-		return 
+		return
 	}
 
 	product.ID = primitive.NewObjectID()
@@ -128,6 +128,28 @@ func InsertProduct(w http.ResponseWriter, r *http.Request) {
 }
 
 
+func serializeProducts(products []Product) (string, error) {
+	var productsStr string
+
+	for i, product := range products {
+		productBytes, err := json.Marshal(product)
+		if err != nil {
+			return productsStr, err
+		}
+
+		productStr := string(productBytes)
+		if i + 1 < len(products) {
+			productStr += ", "
+		}
+
+		productsStr += productStr
+	}
+
+	productsStr = fmt.Sprintf("[%s]", productsStr)
+	return productsStr, nil
+}
+
+
 func GetCatalog(w http.ResponseWriter, r *http.Request) {
 	var resp Response
 	var inputData InputData
@@ -139,9 +161,9 @@ func GetCatalog(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token := inputData.Token
-	if token != LC_API_TOKEN {
-		err = errors.New("Invalid token.")
+	apiKey := inputData.APIKey
+	if apiKey != LC_API_KEY {
+		err = errors.New("Invalid API key.")
 		RecordError(w, r, resp, err)
 		return
 	}
@@ -153,22 +175,13 @@ func GetCatalog(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// TODO
-	// TEST THIS
-	productsStr := fmt.Sprintf("%+v", products)
+	productsStr, err := serializeProducts(products)
 	if err != nil {
-		fmt.Println(err)
+		RecordError(w, r, resp, err)
+		return
 	}
+
 	resp.StatusCode = 200
 	resp.Body = productsStr
 	json.NewEncoder(w).Encode(resp)
-}
-
-func main() {
-	products, _ := queryCatalog("Hoodie", "Adult")
-	
-	// TODO
-	// TEST THIS
-	productsStr := fmt.Sprintf("%+v", products)
-	fmt.Println(productsStr)
 }

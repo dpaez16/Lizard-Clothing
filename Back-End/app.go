@@ -10,6 +10,7 @@ import (
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/sendOrder", SendOrder)
+	mux.HandleFunc("/products", GetCatalog)
 
 	options := cors.Options{
 		AllowedMethods: []string{"POST"},

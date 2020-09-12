@@ -39,9 +39,10 @@ type Response struct {
 }
 
 type InputData struct {
-	Token		string		`json:"token"`
-	Input		Product		`json:"product"`
+	APIKey		string		`json:"apiKey"`
+	Input		Product		`json:"input"`
 }
+
 
 func RecordError(w http.ResponseWriter, r *http.Request, resp Response, err error) {
 	log.Println(err)
