@@ -12,8 +12,8 @@ type Order struct {
 	Email			string			`json:"email"`
 	PhoneNumber		string			`json:"phoneNum"`
 	Message			string			`json:"message"`
-	SpecialOrder	bool			`json:"specialOrder"`
-	Details			OrderDetails	`json:"orderDetails"`
+	SpecialOrder		bool			`json:"specialOrder"`
+	Details			OrderDetails		`json:"orderDetails"`
 }
 
 type OrderDetails struct {
@@ -24,10 +24,10 @@ type OrderDetails struct {
 }
 
 type Product struct {
-	ID 				primitive.ObjectID 		`bson:"_id, omitempty"`
+	ID			primitive.ObjectID			`bson:"_id, omitempty"`
 	ProductName		string					`json:"productName" bson:"productName"`
 	ProductType		string					`json:"productType" bson:"productType"`
-	ProductAgeType	string					`json:"productAgeType" bson:"productAgeType"`
+	ProductAgeType		string					`json:"productAgeType" bson:"productAgeType"`
 	Price			float32					`json:"price" bson:"price"`
 	Description		string					`json:"description" bson:"description"`
 	Images			[]string				`json:"images" bson:"images"`
